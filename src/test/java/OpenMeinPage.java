@@ -12,18 +12,18 @@ public class OpenMeinPage extends DriverRule{
     }
 
     @Test
-    @DisplayName("Check text on Portfolio button")
-    public void checkTextOnPortfolioButton(){
+    @DisplayName("Success open Cryptocurrencies")
+    public void successOpenCryptocurrencies(){
         MainPage mainPage = new MainPage(driver);
-        mainPage.checkPortfolioButtonText();
+        mainPage.clickDexScanButton();
+        try {mainPage.clickCryptocurrenciesButton();}
+        catch (org.openqa.selenium.StaleElementReferenceException e) {
+            mainPage.clickCryptocurrenciesButton();
+        }
+        try {mainPage.checkH1MainTitleText();}
+        catch (org.openqa.selenium.StaleElementReferenceException e) {
+            mainPage.checkH1MainTitleText();
+        }
     }
-
-    @Test
-    @DisplayName("Success open Portfolio")
-    public void successOpenPortfolio(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.clickPortfolioButton();
-    }
-
 
 }
