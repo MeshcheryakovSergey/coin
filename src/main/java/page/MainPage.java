@@ -5,6 +5,7 @@ import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import util.ApiSpecBuilder;
 
 import java.util.List;
@@ -23,12 +24,24 @@ public class MainPage {
 
     private final By h1MainTitle = By.cssSelector("h1[class*='SummaryHeader_main-title']>span");
 
-    private final By cryptocurrenciesButton = By.cssSelector("a[href='/']>div");
-    private final By dexScanButton = By.cssSelector("div[data-role]>a[href='/dexscan/trending/all/']>div");
-    private final By exchangesButton = By.cssSelector("div[data-role]>a[href='/rankings/exchanges/']>div");
-    private final By communityButton = By.cssSelector("div[data-role]>a[href='/community/']>div");
-    private final By productsButton = By.cssSelector("section>:nth-child(5)");
+    private final By cryptocurrenciesButton = By.cssSelector("section[data-hydration-on-demand]>div[data-role]:first-child");
+    private final By dexScanButton = By.cssSelector("section[data-hydration-on-demand]>div[data-role]:nth-child(2)");
+    private final By exchangesButton = By.cssSelector("section[data-hydration-on-demand]>div[data-role]:nth-child(3)");
+    private final By communityButton = By.cssSelector("section[data-hydration-on-demand]>div[data-role]:nth-child(4)");
+    private final By productsButton = By.cssSelector("section[data-hydration-on-demand]>div[data-role]:nth-child(5)");
+
+    private final By cryptocurrenciesButtonText = By.cssSelector("a[href='/']>div");
+    private final By dexScanButtonText = By.cssSelector("div[data-role]>a[href='/dexscan/trending/all/']>div");
+    private final By exchangesButtonText = By.cssSelector("div[data-role]>a[href='/rankings/exchanges/']>div");
+    private final By communityButtonText = By.cssSelector("div[data-role]>a[href='/community/']>div");
+    private final By productsButtonText = By.cssSelector("section>:nth-child(5)");
     private final By menuButtonSize = By.cssSelector("div[data-role='menu-item']");
+
+    private final By cryptocurrenciesSectionText = By.cssSelector("div[data-role='menu-item']:first-child div[class='section']:first-child>div:first-child");
+
+
+
+
 
     private final By portfolioButton = By.cssSelector("div>a[href='/portfolio-tracker/']");
     private final By watchlistButton = By.cssSelector("div>a[href='/watchlist/']");
@@ -79,7 +92,7 @@ public class MainPage {
 
     @Step
     public void checkCryptocurrenciesButtonText() {
-        String text = driver.findElement(cryptocurrenciesButton).getText();
+        String text = driver.findElement(cryptocurrenciesButtonText).getText();
         MatcherAssert.assertThat(text, equalTo("Cryptocurrencies"));
     }
 
@@ -91,25 +104,25 @@ public class MainPage {
 
     @Step
     public void checkDexScanButtonText() {
-        String text = driver.findElement(dexScanButton).getText();
+        String text = driver.findElement(dexScanButtonText).getText();
         MatcherAssert.assertThat(text, equalTo("DexScan"));
     }
 
     @Step
     public void checkCommunityButtonText() {
-        String text = driver.findElement(communityButton).getText();
+        String text = driver.findElement(communityButtonText).getText();
         MatcherAssert.assertThat(text, equalTo("Community"));
     }
 
     @Step
     public void checkExchangesButtonText() {
-        String text = driver.findElement(exchangesButton).getText();
+        String text = driver.findElement(exchangesButtonText).getText();
         MatcherAssert.assertThat(text, equalTo("Exchanges"));
     }
 
     @Step
     public void checkProductsButtonText() {
-        String text = driver.findElement(productsButton).getText();
+        String text = driver.findElement(productsButtonText).getText();
         MatcherAssert.assertThat(text, equalTo("Products"));
     }
 
@@ -151,26 +164,26 @@ public class MainPage {
 
     @Step
     public void clickCryptocurrenciesButton() {
-        driver.findElement(cryptocurrenciesButton).click();
+        driver.findElement(cryptocurrenciesButtonText).click();
     }
 
     @Step
     public void clickDexScanButton() {
-        driver.findElement(dexScanButton).click();
+        driver.findElement(dexScanButtonText).click();
     }
 
     @Step
     public void clickExchangesButton() {
-        driver.findElement(exchangesButton).click();
+        driver.findElement(exchangesButtonText).click();
     }
 
     @Step
     public void clickCommunityButton() {
-        driver.findElement(communityButton).click();
+        driver.findElement(communityButtonText).click();
     }
 
     @Step
-    public void clickProductsButton() {driver.findElement(productsButton).click();}
+    public void clickProductsButton() {driver.findElement(productsButtonText).click();}
 
     @Step
     public void clickPortfolioButton() {
@@ -199,10 +212,24 @@ public class MainPage {
 
     @Step
     public void checkMenuButtonSize() {
-        //findElements - с s на конце так как элементов не сколько
+        //findElements - с s на конце так как элементов больше 1
         List<WebElement> menuButtonElement = (List<WebElement>) driver.findElements(menuButtonSize);
         int menuSize = menuButtonElement.size();
         MatcherAssert.assertThat(menuSize, equalTo(5));
+    }
+
+    @Step
+    public void checkCryptocurrenciesSectionText() {
+        String text = driver.findElement(cryptocurrenciesSectionText).getText();
+        MatcherAssert.assertThat(text, equalTo("Cryptocurrencies"));
+    }
+
+    //наведение на элемент
+    @Step
+    public void hoverCryptocurrenciesButton() {
+        WebElement menuButton = driver.findElement(cryptocurrenciesButton);
+        Actions actions = new Actions(driver);
+        actions.moveToElement(menuButton).perform();
     }
 
 }

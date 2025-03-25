@@ -160,8 +160,8 @@ public class MainHeader extends DriverRule{
     }
 
     @Test
-    @DisplayName("Success open user dropdown")
-    public void checkMenuButtonSize(){
+    @DisplayName("Count left side menu")
+    public void countLeftMenuButtonSize(){
         MainPage mainPage = new MainPage(driver);
         mainPage.checkMenuButtonSize();
     }
