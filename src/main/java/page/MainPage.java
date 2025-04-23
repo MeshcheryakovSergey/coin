@@ -23,6 +23,11 @@ public class MainPage {
     private final By lightButtonInUserMenu = By.cssSelector("li[data-index='tab-light']");
 
     private final By h1MainTitle = By.cssSelector("h1[class*='SummaryHeader_main-title']>span");
+    private final By h1CryptocurrencyCategory = By.cssSelector("h1[class*='SummaryHeader_main-title']>span");
+    private final By h1CryptocurrencyHistoricalSnapshots = By.cssSelector("div[class='cmc-main-section__content']>h1");
+    private final By h1CryptocurrencyTokenUnlocks = By.cssSelector("h1[class*='SummaryHeader_main-title']>span");
+    private final By h1CryptocurrencyYield = By.cssSelector("h1[class*='SummaryHeader_main-title']>span");
+
 
     private final By cryptocurrenciesButton = By.cssSelector("section[data-hydration-on-demand]>div[data-role]:first-child");
     private final By dexScanButton = By.cssSelector("section[data-hydration-on-demand]>div[data-role]:nth-child(2)");
@@ -38,6 +43,15 @@ public class MainPage {
     private final By menuButtonSize = By.cssSelector("div[data-role='menu-item']");
 
     private final By cryptocurrenciesSectionText = By.cssSelector("div[data-role='menu-item']:first-child div[class='section']:first-child>div:first-child");
+    private final By cryptocurrenciesMenuListSize = By.cssSelector("div[data-role='menu-item']:first-child div[class='section']:first-child>div:nth-child(2)>a");
+
+
+
+    private final By cryptocurrenciesRanking = By.cssSelector("div[data-role='menu-item']:first-child div[class='section']:first-child>div:nth-child(2)>a:first-child");
+    private final By cryptocurrenciesCategories = By.cssSelector("div[data-role='menu-item']:first-child div[class='section']:first-child>div:nth-child(2)>a:nth-child(2)");
+    private final By cryptocurrenciesHistoricalSnapshots = By.cssSelector("div[data-role='menu-item']:first-child div[class='section']:first-child>div:nth-child(2)>a:nth-child(3)");
+    private final By cryptocurrenciesTokenUnlocks = By.cssSelector("div[data-role='menu-item']:first-child div[class='section']:first-child>div:nth-child(2)>a:nth-child(4)");
+    private final By cryptocurrenciesYield = By.cssSelector("div[data-role='menu-item']:first-child div[class='section']:first-child>div:nth-child(2)>a:nth-child(5)");
 
 
 
@@ -101,6 +115,31 @@ public class MainPage {
         String text = driver.findElement(h1MainTitle).getText();
         MatcherAssert.assertThat(text, equalTo("Today's Cryptocurrency Prices by Market Cap"));
     }
+
+    @Step
+    public void checkH1CryptocurrencyCategoryText() {
+        String text = driver.findElement(h1CryptocurrencyCategory).getText();
+        MatcherAssert.assertThat(text, equalTo("Cryptocurrency Sectors by 24h Price Change"));
+    }
+
+    @Step
+    public void checkH1CryptocurrencyHistoricalSnapshotsText() {
+        String text = driver.findElement(h1CryptocurrencyHistoricalSnapshots).getText();
+        MatcherAssert.assertThat(text, equalTo("Cryptocurrency Historical Data Snapshot"));
+    }
+
+    @Step
+    public void checkH1CryptocurrencyTokenUnlocksText() {
+        String text = driver.findElement(h1CryptocurrencyTokenUnlocks).getText();
+        MatcherAssert.assertThat(text, equalTo("Token Unlock And Vesting Schedules"));
+    }
+
+    @Step
+    public void checkH1CryptocurrencyYieldText() {
+        String text = driver.findElement(h1CryptocurrencyTokenUnlocks).getText();
+        MatcherAssert.assertThat(text, equalTo("Explore Yield Products"));
+    }
+
 
     @Step
     public void checkDexScanButtonText() {
@@ -231,5 +270,69 @@ public class MainPage {
         Actions actions = new Actions(driver);
         actions.moveToElement(menuButton).perform();
     }
+
+    @Step
+    public void checkCryptocurrenciesMenuListSize() {
+        List<WebElement> cryptocurrenciesMenuList = (List<WebElement>) driver.findElements(cryptocurrenciesMenuListSize);
+        int listSize = cryptocurrenciesMenuList.size();
+        MatcherAssert.assertThat(listSize, equalTo(5));
+    }
+
+    @Step
+    public void checkCryptocurrenciesRankingText() {
+        String text = driver.findElement(cryptocurrenciesRanking).getText();
+        MatcherAssert.assertThat(text, equalTo("Ranking"));
+    }
+
+    @Step
+    public void clickRankingLink() {
+        driver.findElement(cryptocurrenciesRanking).click();
+    }
+
+    @Step
+    public void checkCryptocurrenciesCategoriesText() {
+        String text = driver.findElement(cryptocurrenciesCategories).getText();
+        MatcherAssert.assertThat(text, equalTo("Categories"));
+    }
+
+    @Step
+    public void clickCategoriesLink() {
+        driver.findElement(cryptocurrenciesCategories).click();
+    }
+
+    @Step
+    public void checkCryptocurrenciesHistoricalSnapshotsText() {
+        String text = driver.findElement(cryptocurrenciesHistoricalSnapshots).getText();
+        MatcherAssert.assertThat(text, equalTo("Historical Snapshots"));
+    }
+
+    @Step
+    public void clickHistoricalSnapshotsLink() {
+        driver.findElement(cryptocurrenciesHistoricalSnapshots).click();
+    }
+
+    @Step
+    public void checkCryptocurrenciesTokenUnlocksText() {
+        String text = driver.findElement(cryptocurrenciesTokenUnlocks).getText();
+        MatcherAssert.assertThat(text, equalTo("Token unlocks"));
+    }
+
+    @Step
+    public void clickTokenUnlocksLink() {
+        driver.findElement(cryptocurrenciesTokenUnlocks).click();
+    }
+
+    @Step
+    public void checkCryptocurrenciesYieldText() {
+        String text = driver.findElement(cryptocurrenciesYield).getText();
+        MatcherAssert.assertThat(text, equalTo("Yield"));
+    }
+
+    @Step
+    public void clickYieldLink() {
+        driver.findElement(cryptocurrenciesYield).click();
+    }
+
+
 
 }
