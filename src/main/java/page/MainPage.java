@@ -43,8 +43,9 @@ public class MainPage {
     private final By menuButtonSize = By.cssSelector("div[data-role='menu-item']");
 
     private final By cryptocurrenciesSectionText = By.cssSelector("div[data-role='menu-item']:first-child div[class='section']:first-child>div:first-child");
-    private final By cryptocurrenciesMenuListSize = By.cssSelector("div[data-role='menu-item']:first-child div[class='section']:first-child>div:nth-child(2)>a");
-
+    private final By cryptocurrenciesSectionMenuListSize = By.cssSelector("div[data-role='menu-item']:first-child div[class='section']:first-child>div:nth-child(2)>a");
+    private final By leaderboardsSectionText = By.cssSelector("div[class='section leaderboards-section']>div:first-child");
+    private final By leaderboardsSectionMenuListSize = By.cssSelector("div[class='section leaderboards-section']>div:nth-child(2)>a");
 
 
     private final By cryptocurrenciesRanking = By.cssSelector("div[data-role='menu-item']:first-child div[class='section']:first-child>div:nth-child(2)>a:first-child");
@@ -273,7 +274,7 @@ public class MainPage {
 
     @Step
     public void checkCryptocurrenciesMenuListSize() {
-        List<WebElement> cryptocurrenciesMenuList = (List<WebElement>) driver.findElements(cryptocurrenciesMenuListSize);
+        List<WebElement> cryptocurrenciesMenuList = (List<WebElement>) driver.findElements(cryptocurrenciesSectionMenuListSize);
         int listSize = cryptocurrenciesMenuList.size();
         MatcherAssert.assertThat(listSize, equalTo(5));
     }
@@ -333,6 +334,17 @@ public class MainPage {
         driver.findElement(cryptocurrenciesYield).click();
     }
 
+    @Step
+    public void checkLeaderboardsSectionText() {
+        String text = driver.findElement(leaderboardsSectionText).getText();
+        MatcherAssert.assertThat(text, equalTo("Leaderboards"));
+    }
 
+    @Step
+    public void checkLeaderboardsSectionMenuListSize() {
+        List<WebElement> cryptocurrenciesMenuList = (List<WebElement>) driver.findElements(leaderboardsSectionMenuListSize);
+        int listSize = cryptocurrenciesMenuList.size();
+        MatcherAssert.assertThat(listSize, equalTo(7));
+    }
 
 }

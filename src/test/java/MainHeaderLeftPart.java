@@ -147,5 +147,24 @@ public class MainHeaderLeftPart extends DriverRule{
     }
 
 
+    // тесты для секции Leaderboards в выпадающем меню Cryptocurrencies
+    @Test
+    @DisplayName("Check text on Leaderboards Section on left menu")
+    public void checkTextOnLeaderboardsSection(){
+        MainPage mainPage = new MainPage(driver);
+        mainPage.hoverCryptocurrenciesButton();
+        mainPage.checkLeaderboardsSectionText();
+    }
+
+    @Test
+    @DisplayName("Count item in Leaderboards Section on left menu")
+    public void countLeaderboardsSectionListSize(){
+        MainPage mainPage = new MainPage(driver);
+        try {mainPage.hoverCryptocurrenciesButton();}
+        catch (org.openqa.selenium.StaleElementReferenceException e) {
+            mainPage.hoverCryptocurrenciesButton();
+        }
+        mainPage.checkLeaderboardsSectionMenuListSize();
+    }
 
 }
