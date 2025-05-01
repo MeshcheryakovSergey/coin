@@ -167,4 +167,226 @@ public class MainHeaderLeftPart extends DriverRule{
         mainPage.checkLeaderboardsSectionMenuListSize();
     }
 
+    @Test
+    @DisplayName("Check text on Trending link")
+    public void checkTextOnTrendingLink(){
+        MainPage mainPage = new MainPage(driver);
+        mainPage.hoverCryptocurrenciesButton();
+        mainPage.checkLeaderboardsTrendingText();
+    }
+
+    @Test
+    @DisplayName("Success follow the Trending link ")
+    public void successOpenTrending() {
+        MainPage mainPage = new MainPage(driver);
+        mainPage.hoverCryptocurrenciesButton();
+        try {
+            mainPage.clickTrendingLink();
+        } catch (org.openqa.selenium.StaleElementReferenceException e) {
+            mainPage.clickTrendingLink();
+        }
+        try {
+            mainPage.checkH1LeaderboardsTrendingText();
+        } catch (org.openqa.selenium.StaleElementReferenceException e) {
+            mainPage.checkH1LeaderboardsTrendingText();
+        }
+    }
+
+    @Test
+    @DisplayName("Check text on Upcoming link")
+    public void checkTextOnUpcomingLink(){
+        MainPage mainPage = new MainPage(driver);
+        mainPage.hoverCryptocurrenciesButton();
+        mainPage.checkLeaderboardsUpcomingText();
+    }
+
+    @Test
+    @DisplayName("Success follow the Upcoming link ")
+    public void successOpenUpcoming() {
+        MainPage mainPage = new MainPage(driver);
+        mainPage.hoverCryptocurrenciesButton();
+        try {
+            mainPage.clickUpcomingLink();
+        } catch (org.openqa.selenium.StaleElementReferenceException e) {
+            mainPage.clickUpcomingLink();
+        }
+        try {
+            mainPage.checkH1LeaderboardsUpcomingText();
+        } catch (org.openqa.selenium.StaleElementReferenceException e) {
+            mainPage.checkH1LeaderboardsUpcomingText();
+        }
+    }
+
+    @Test
+    @DisplayName("Check text on Recently Added link")
+    public void checkTextOnRecentlyAddedLink(){
+        MainPage mainPage = new MainPage(driver);
+        mainPage.hoverCryptocurrenciesButton();
+        mainPage.checkLeaderboardsRecentlyAddedText();
+    }
+
+    @Test
+    @DisplayName("Success follow the Recently Added link ")
+    public void successOpenRecentlyAdded() {
+        MainPage mainPage = new MainPage(driver);
+        mainPage.hoverCryptocurrenciesButton();
+        try {
+            mainPage.clickRecentlyAddedLink();
+        } catch (org.openqa.selenium.StaleElementReferenceException e) {
+            mainPage.clickRecentlyAddedLink();
+        }
+        try {
+            mainPage.checkH1LeaderboardsRecentlyAddedText();
+        } catch (org.openqa.selenium.StaleElementReferenceException e) {
+            mainPage.checkH1LeaderboardsRecentlyAddedText();
+        }
+    }
+
+    @Test
+    @DisplayName("Check text on Gainers Losers link")
+    public void checkTextOnGainersLosersLink(){
+        MainPage mainPage = new MainPage(driver);
+        mainPage.hoverCryptocurrenciesButton();
+        mainPage.checkLeaderboardsGainersLosersText();
+    }
+
+    @Test
+    @DisplayName("Success follow the Gainers Losers link ")
+    public void successOpenGainersLosers() {
+        MainPage mainPage = new MainPage(driver);
+        mainPage.hoverCryptocurrenciesButton();
+        try {
+            mainPage.clickGainersLosersLink();
+        } catch (org.openqa.selenium.StaleElementReferenceException e) {
+            mainPage.clickGainersLosersLink();
+        }
+        try {
+            mainPage.checkH1LeaderboardsGainersLosersText();
+        } catch (org.openqa.selenium.StaleElementReferenceException e) {
+            mainPage.checkH1LeaderboardsGainersLosersText();
+        }
+    }
+
+    @Test
+    @DisplayName("Check text on Most Visited link")
+    public void checkTextOnMostVisitedLink(){
+        MainPage mainPage = new MainPage(driver);
+        mainPage.hoverCryptocurrenciesButton();
+        mainPage.checkLeaderboardsMostVisitedText();
+    }
+
+    @Test
+    @DisplayName("Success follow the Most Visited link ")
+    public void successOpenMostVisited() {
+        MainPage mainPage = new MainPage(driver);
+        mainPage.hoverCryptocurrenciesButton();
+        try {
+            mainPage.clickMostVisitedLink();
+        } catch (org.openqa.selenium.StaleElementReferenceException e) {
+            mainPage.clickMostVisitedLink();
+        }
+        try {
+            mainPage.checkH1LeaderboardsMostVisitedText();
+        } catch (org.openqa.selenium.StaleElementReferenceException e) {
+            mainPage.checkH1LeaderboardsMostVisitedText();
+        }
+    }
+
+    @Test
+    @DisplayName("Check text on Community Sentiment link")
+    public void checkTextOnCommunitySentimentLink(){
+        MainPage mainPage = new MainPage(driver);
+        mainPage.hoverCryptocurrenciesButton();
+        mainPage.checkLeaderboardsCommunitySentimentText();
+    }
+
+    @Test
+    @DisplayName("Success follow the Community Sentiment link ")
+    public void successOpenCommunitySentiment() {
+        MainPage mainPage = new MainPage(driver);
+        mainPage.hoverCryptocurrenciesButton();
+        try {
+            mainPage.clickCommunitySentimentLink();
+        } catch (org.openqa.selenium.StaleElementReferenceException e) {
+            mainPage.clickCommunitySentimentLink();
+        }
+        try {
+            mainPage.checkH1LeaderboardsCommunitySentimentText();
+        } catch (org.openqa.selenium.StaleElementReferenceException e) {
+            mainPage.checkH1LeaderboardsCommunitySentimentText();
+        }
+    }
+
+    @Test
+    @DisplayName("Check text on Chain Ranking link")
+    public void checkTextOnChainRankingLink(){
+        MainPage mainPage = new MainPage(driver);
+        mainPage.hoverCryptocurrenciesButton();
+        mainPage.checkLeaderboardsChainRankingText();
+    }
+
+    @Test
+    @DisplayName("Success follow the Chain Ranking link ")
+    public void successOpenChainRanking() {
+        MainPage mainPage = new MainPage(driver);
+        mainPage.hoverCryptocurrenciesButton();
+        try {
+            mainPage.clickChainRankingLink();
+        } catch (org.openqa.selenium.StaleElementReferenceException e) {
+            mainPage.clickChainRankingLink();
+        }
+        try {
+            mainPage.checkH1LeaderboardsChainRankingText();
+        } catch (org.openqa.selenium.StaleElementReferenceException e) {
+            mainPage.checkH1LeaderboardsChainRankingText();
+        }
+    }
+
+
+    // тесты для секции Market Overview в выпадающем меню Cryptocurrencies
+    @Test
+    @DisplayName("Check text on Market Overview Section on left menu")
+    public void checkTextOnMarketOverviewSection(){
+        MainPage mainPage = new MainPage(driver);
+        mainPage.hoverCryptocurrenciesButton();
+        mainPage.checkMarketOverviewSectionText();
+    }
+
+    @Test
+    @DisplayName("Count item in Market Overview Section on left menu")
+    public void countMarketOverviewListSize(){
+        MainPage mainPage = new MainPage(driver);
+        try {mainPage.hoverCryptocurrenciesButton();}
+        catch (org.openqa.selenium.StaleElementReferenceException e) {
+            mainPage.hoverCryptocurrenciesButton();
+        }
+        mainPage.checkMarketOverviewSectionSize();
+    }
+
+    @Test
+    @DisplayName("Check text on Market Overview link")
+    public void checkTextOnMarketOverviewLink(){
+        MainPage mainPage = new MainPage(driver);
+        mainPage.hoverCryptocurrenciesButton();
+        mainPage.checkMarketOverviewMarketOverviewText();
+    }
+
+    @Test
+    @DisplayName("Success follow the Market Overview link ")
+    public void successOpenMarketOverview () {
+        MainPage mainPage = new MainPage(driver);
+        mainPage.hoverCryptocurrenciesButton();
+        try {
+            mainPage.clickMarketOverviewLink();
+        } catch (org.openqa.selenium.StaleElementReferenceException e) {
+            mainPage.clickMarketOverviewLink();
+        }
+        try {
+            mainPage.checkH1MarketOverviewMarketOverviewText();
+        } catch (org.openqa.selenium.StaleElementReferenceException e) {
+            mainPage.checkH1MarketOverviewMarketOverviewText();
+        }
+    }
+
+
 }
