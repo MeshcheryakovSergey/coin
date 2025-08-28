@@ -22,9 +22,9 @@ public class DriverRule extends ExternalResource {
         //driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
     }
 
-    @After
-    public void cleanUp() {
-        driver.quit();
-    }
+//    @After
+//    public void cleanUp() {
+//        driver.quit();
+//    }
 
 }

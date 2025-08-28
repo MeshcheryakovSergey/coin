@@ -1,148 +1,150 @@
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.Before;
 import org.junit.Test;
-import page.MainPage;
+import page.main.Header;
+import page.main.HeaderLeftMenu;
 
 public class MainHeaderLeftPart extends DriverRule{
 
     @Before
     public void openMain(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.open();
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.open();
     }
 
     @Test
     @DisplayName("Check text on Cryptocurrencies Section on left menu")
     public void checkTextOnCryptocurrenciesButton(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.hoverCryptocurrenciesButton();
-        mainPage.checkCryptocurrenciesSectionText();
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.hoverCryptocurrenciesButton();
+        leftMenu.checkCryptocurrenciesSectionText();
     }
 
     @Test
     @DisplayName("Count item in Cryptocurrencies Section on left menu")
     public void countCryptocurrenciesMenuListSize(){
-        MainPage mainPage = new MainPage(driver);
-        try {mainPage.hoverCryptocurrenciesButton();}
-        catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.hoverCryptocurrenciesButton();
-        }
-        mainPage.checkCryptocurrenciesMenuListSize();
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.hoverCryptocurrenciesButton();
+        leftMenu.checkCryptocurrenciesMenuListSize();
     }
 
     @Test
     @DisplayName("Check text on Ranking link")
     public void checkTextOnRankingLink(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.hoverCryptocurrenciesButton();
-        mainPage.checkCryptocurrenciesRankingText();
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.hoverCryptocurrenciesButton();
+        leftMenu.checkCryptocurrenciesRankingText();
     }
 
     @Test
     @DisplayName("Success follow the Ranking link ")
     public void successFollowRankingLink(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.clickDexScanButton();
-        mainPage.hoverCryptocurrenciesButton();
-        try {mainPage.clickRankingLink();}
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        Header header = new Header(driver);
+        try {header.clickDexScanButton();}
         catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.clickRankingLink();
+            header.clickDexScanButton();
         }
-        try {mainPage.checkH1MainTitleText();}
+        leftMenu.hoverCryptocurrenciesButton();
+        try {leftMenu.clickRankingLink();}
         catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.checkH1MainTitleText();
+            leftMenu.clickRankingLink();
+        }
+        try {header.checkH1MainTitleText();}
+        catch (org.openqa.selenium.StaleElementReferenceException e) {
+            header.checkH1MainTitleText();
         }
     }
 
     @Test
     @DisplayName("Check text on Categories link")
     public void checkTextOnCategoriesLink(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.hoverCryptocurrenciesButton();
-        mainPage.checkCryptocurrenciesCategoriesText();
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.hoverCryptocurrenciesButton();
+        leftMenu.checkCryptocurrenciesCategoriesText();
     }
 
     @Test
     @DisplayName("Success follow the Categories link ")
     public void successOpenCryptocurrencies(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.hoverCryptocurrenciesButton();
-        try {mainPage.clickCategoriesLink();}
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.hoverCryptocurrenciesButton();
+        try {leftMenu.clickCategoriesLink();}
         catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.clickCategoriesLink();
+            leftMenu.clickCategoriesLink();
         }
-        try {mainPage.checkH1CryptocurrencyCategoryText();}
+        try {leftMenu.checkH1CryptocurrencyCategoryText();}
         catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.checkH1CryptocurrencyCategoryText();
+            leftMenu.checkH1CryptocurrencyCategoryText();
         }
     }
 
     @Test
     @DisplayName("Check text on Historical Snapshots link")
     public void checkTextOnHistoricalSnapshotsLink(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.hoverCryptocurrenciesButton();
-        mainPage.checkCryptocurrenciesHistoricalSnapshotsText();
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.hoverCryptocurrenciesButton();
+        leftMenu.checkCryptocurrenciesHistoricalSnapshotsText();
     }
 
     @Test
     @DisplayName("Success follow the Historical Snapshots link ")
     public void successOpenHistoricalSnapshots(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.hoverCryptocurrenciesButton();
-        try {mainPage.clickHistoricalSnapshotsLink();}
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.hoverCryptocurrenciesButton();
+        try {leftMenu.clickHistoricalSnapshotsLink();}
         catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.clickHistoricalSnapshotsLink();
+            leftMenu.clickHistoricalSnapshotsLink();
         }
-        try {mainPage.checkH1CryptocurrencyHistoricalSnapshotsText();}
+        try {leftMenu.checkH1CryptocurrencyHistoricalSnapshotsText();}
         catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.checkH1CryptocurrencyHistoricalSnapshotsText();
+            leftMenu.checkH1CryptocurrencyHistoricalSnapshotsText();
         }
     }
 
     @Test
     @DisplayName("Check text on Token Unlocks link")
     public void checkTextOnTokenUnlocksLink(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.hoverCryptocurrenciesButton();
-        mainPage.checkCryptocurrenciesTokenUnlocksText();
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.hoverCryptocurrenciesButton();
+        leftMenu.checkCryptocurrenciesTokenUnlocksText();
     }
 
     @Test
     @DisplayName("Success follow the Token Unlocks link ")
     public void successOpenTokenUnlocks(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.hoverCryptocurrenciesButton();
-        try {mainPage.clickTokenUnlocksLink();}
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.hoverCryptocurrenciesButton();
+        try {leftMenu.clickTokenUnlocksLink();}
         catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.clickTokenUnlocksLink();
+            leftMenu.clickTokenUnlocksLink();
         }
-        try {mainPage.checkH1CryptocurrencyTokenUnlocksText();}
+        try {leftMenu.checkH1CryptocurrencyTokenUnlocksText();}
         catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.checkH1CryptocurrencyTokenUnlocksText();
+            leftMenu.checkH1CryptocurrencyTokenUnlocksText();
         }
     }
 
     @Test
     @DisplayName("Check text on Yield link")
     public void checkTextOnYieldLink(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.hoverCryptocurrenciesButton();
-        mainPage.checkCryptocurrenciesYieldText();
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.hoverCryptocurrenciesButton();
+        leftMenu.checkCryptocurrenciesYieldText();
     }
 
     @Test
     @DisplayName("Success follow the Yield link ")
     public void successOpenYield(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.hoverCryptocurrenciesButton();
-        try {mainPage.clickYieldLink();}
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.hoverCryptocurrenciesButton();
+        try {leftMenu.clickYieldLink();}
         catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.clickYieldLink();
+            leftMenu.clickYieldLink();
         }
-        try {mainPage.checkH1CryptocurrencyYieldText();}
+        try {leftMenu.checkH1CryptocurrencyYieldText();}
         catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.checkH1CryptocurrencyYieldText();
+            leftMenu.checkH1CryptocurrencyYieldText();
         }
     }
 
@@ -151,194 +153,191 @@ public class MainHeaderLeftPart extends DriverRule{
     @Test
     @DisplayName("Check text on Leaderboards Section on left menu")
     public void checkTextOnLeaderboardsSection(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.hoverCryptocurrenciesButton();
-        mainPage.checkLeaderboardsSectionText();
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.hoverCryptocurrenciesButton();
+        leftMenu.checkLeaderboardsSectionText();
     }
 
     @Test
     @DisplayName("Count item in Leaderboards Section on left menu")
     public void countLeaderboardsSectionListSize(){
-        MainPage mainPage = new MainPage(driver);
-        try {mainPage.hoverCryptocurrenciesButton();}
-        catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.hoverCryptocurrenciesButton();
-        }
-        mainPage.checkLeaderboardsSectionMenuListSize();
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.hoverCryptocurrenciesButton();
+        leftMenu.checkLeaderboardsSectionMenuListSize();
     }
 
     @Test
     @DisplayName("Check text on Trending link")
     public void checkTextOnTrendingLink(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.hoverCryptocurrenciesButton();
-        mainPage.checkLeaderboardsTrendingText();
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.hoverCryptocurrenciesButton();
+        leftMenu.checkLeaderboardsTrendingText();
     }
 
     @Test
     @DisplayName("Success follow the Trending link ")
     public void successOpenTrending() {
-        MainPage mainPage = new MainPage(driver);
-        mainPage.hoverCryptocurrenciesButton();
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.hoverCryptocurrenciesButton();
         try {
-            mainPage.clickTrendingLink();
+            leftMenu.clickTrendingLink();
         } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.clickTrendingLink();
+            leftMenu.clickTrendingLink();
         }
         try {
-            mainPage.checkH1LeaderboardsTrendingText();
+            leftMenu.checkH1LeaderboardsTrendingText();
         } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.checkH1LeaderboardsTrendingText();
+            leftMenu.checkH1LeaderboardsTrendingText();
         }
     }
 
     @Test
     @DisplayName("Check text on Upcoming link")
     public void checkTextOnUpcomingLink(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.hoverCryptocurrenciesButton();
-        mainPage.checkLeaderboardsUpcomingText();
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.hoverCryptocurrenciesButton();
+        leftMenu.checkLeaderboardsUpcomingText();
     }
 
     @Test
     @DisplayName("Success follow the Upcoming link ")
     public void successOpenUpcoming() {
-        MainPage mainPage = new MainPage(driver);
-        mainPage.hoverCryptocurrenciesButton();
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.hoverCryptocurrenciesButton();
         try {
-            mainPage.clickUpcomingLink();
+            leftMenu.clickUpcomingLink();
         } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.clickUpcomingLink();
+            leftMenu.clickUpcomingLink();
         }
         try {
-            mainPage.checkH1LeaderboardsUpcomingText();
+            leftMenu.checkH1LeaderboardsUpcomingText();
         } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.checkH1LeaderboardsUpcomingText();
+            leftMenu.checkH1LeaderboardsUpcomingText();
         }
     }
 
     @Test
     @DisplayName("Check text on Recently Added link")
     public void checkTextOnRecentlyAddedLink(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.hoverCryptocurrenciesButton();
-        mainPage.checkLeaderboardsRecentlyAddedText();
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.hoverCryptocurrenciesButton();
+        leftMenu.checkLeaderboardsRecentlyAddedText();
     }
 
     @Test
     @DisplayName("Success follow the Recently Added link ")
     public void successOpenRecentlyAdded() {
-        MainPage mainPage = new MainPage(driver);
-        mainPage.hoverCryptocurrenciesButton();
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.hoverCryptocurrenciesButton();
         try {
-            mainPage.clickRecentlyAddedLink();
+            leftMenu.clickRecentlyAddedLink();
         } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.clickRecentlyAddedLink();
+            leftMenu.clickRecentlyAddedLink();
         }
         try {
-            mainPage.checkH1LeaderboardsRecentlyAddedText();
+            leftMenu.checkH1LeaderboardsRecentlyAddedText();
         } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.checkH1LeaderboardsRecentlyAddedText();
+            leftMenu.checkH1LeaderboardsRecentlyAddedText();
         }
     }
 
     @Test
     @DisplayName("Check text on Gainers Losers link")
     public void checkTextOnGainersLosersLink(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.hoverCryptocurrenciesButton();
-        mainPage.checkLeaderboardsGainersLosersText();
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.hoverCryptocurrenciesButton();
+        leftMenu.checkLeaderboardsGainersLosersText();
     }
 
     @Test
     @DisplayName("Success follow the Gainers Losers link ")
     public void successOpenGainersLosers() {
-        MainPage mainPage = new MainPage(driver);
-        mainPage.hoverCryptocurrenciesButton();
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.hoverCryptocurrenciesButton();
         try {
-            mainPage.clickGainersLosersLink();
+            leftMenu.clickGainersLosersLink();
         } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.clickGainersLosersLink();
+            leftMenu.clickGainersLosersLink();
         }
         try {
-            mainPage.checkH1LeaderboardsGainersLosersText();
+            leftMenu.checkH1LeaderboardsGainersLosersText();
         } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.checkH1LeaderboardsGainersLosersText();
+            leftMenu.checkH1LeaderboardsGainersLosersText();
         }
     }
 
     @Test
     @DisplayName("Check text on Most Visited link")
     public void checkTextOnMostVisitedLink(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.hoverCryptocurrenciesButton();
-        mainPage.checkLeaderboardsMostVisitedText();
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.hoverCryptocurrenciesButton();
+        leftMenu.checkLeaderboardsMostVisitedText();
     }
 
     @Test
     @DisplayName("Success follow the Most Visited link ")
     public void successOpenMostVisited() {
-        MainPage mainPage = new MainPage(driver);
-        mainPage.hoverCryptocurrenciesButton();
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.hoverCryptocurrenciesButton();
         try {
-            mainPage.clickMostVisitedLink();
+            leftMenu.clickMostVisitedLink();
         } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.clickMostVisitedLink();
+            leftMenu.clickMostVisitedLink();
         }
         try {
-            mainPage.checkH1LeaderboardsMostVisitedText();
+            leftMenu.checkH1LeaderboardsMostVisitedText();
         } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.checkH1LeaderboardsMostVisitedText();
+            leftMenu.checkH1LeaderboardsMostVisitedText();
         }
     }
 
     @Test
     @DisplayName("Check text on Community Sentiment link")
     public void checkTextOnCommunitySentimentLink(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.hoverCryptocurrenciesButton();
-        mainPage.checkLeaderboardsCommunitySentimentText();
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.hoverCryptocurrenciesButton();
+        leftMenu.checkLeaderboardsCommunitySentimentText();
     }
 
     @Test
     @DisplayName("Success follow the Community Sentiment link ")
     public void successOpenCommunitySentiment() {
-        MainPage mainPage = new MainPage(driver);
-        mainPage.hoverCryptocurrenciesButton();
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.hoverCryptocurrenciesButton();
         try {
-            mainPage.clickCommunitySentimentLink();
+            leftMenu.clickCommunitySentimentLink();
         } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.clickCommunitySentimentLink();
+            leftMenu.clickCommunitySentimentLink();
         }
         try {
-            mainPage.checkH1LeaderboardsCommunitySentimentText();
+            leftMenu.checkH1LeaderboardsCommunitySentimentText();
         } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.checkH1LeaderboardsCommunitySentimentText();
+            leftMenu.checkH1LeaderboardsCommunitySentimentText();
         }
     }
 
     @Test
     @DisplayName("Check text on Chain Ranking link")
     public void checkTextOnChainRankingLink(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.hoverCryptocurrenciesButton();
-        mainPage.checkLeaderboardsChainRankingText();
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.hoverCryptocurrenciesButton();
+        leftMenu.checkLeaderboardsChainRankingText();
     }
 
     @Test
     @DisplayName("Success follow the Chain Ranking link ")
     public void successOpenChainRanking() {
-        MainPage mainPage = new MainPage(driver);
-        mainPage.hoverCryptocurrenciesButton();
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.hoverCryptocurrenciesButton();
         try {
-            mainPage.clickChainRankingLink();
+            leftMenu.clickChainRankingLink();
         } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.clickChainRankingLink();
+            leftMenu.clickChainRankingLink();
         }
         try {
-            mainPage.checkH1LeaderboardsChainRankingText();
+            leftMenu.checkH1LeaderboardsChainRankingText();
         } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.checkH1LeaderboardsChainRankingText();
+            leftMenu.checkH1LeaderboardsChainRankingText();
         }
     }
 
@@ -347,44 +346,41 @@ public class MainHeaderLeftPart extends DriverRule{
     @Test
     @DisplayName("Check text on Market Overview Section on left menu")
     public void checkTextOnMarketOverviewSection(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.hoverCryptocurrenciesButton();
-        mainPage.checkMarketOverviewSectionText();
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.hoverCryptocurrenciesButton();
+        leftMenu.checkMarketOverviewSectionText();
     }
 
     @Test
     @DisplayName("Count item in Market Overview Section on left menu")
     public void countMarketOverviewListSize(){
-        MainPage mainPage = new MainPage(driver);
-        try {mainPage.hoverCryptocurrenciesButton();}
-        catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.hoverCryptocurrenciesButton();
-        }
-        mainPage.checkMarketOverviewSectionSize();
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.hoverCryptocurrenciesButton();
+        leftMenu.checkMarketOverviewSectionSize();
     }
 
     @Test
     @DisplayName("Check text on Market Overview link")
     public void checkTextOnMarketOverviewLink(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.hoverCryptocurrenciesButton();
-        mainPage.checkMarketOverviewMarketOverviewText();
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.hoverCryptocurrenciesButton();
+        leftMenu.checkMarketOverviewMarketOverviewText();
     }
 
     @Test
     @DisplayName("Success follow the Market Overview link ")
     public void successOpenMarketOverview () {
-        MainPage mainPage = new MainPage(driver);
-        mainPage.hoverCryptocurrenciesButton();
+        HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
+        leftMenu.hoverCryptocurrenciesButton();
         try {
-            mainPage.clickMarketOverviewLink();
+            leftMenu.clickMarketOverviewLink();
         } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.clickMarketOverviewLink();
+            leftMenu.clickMarketOverviewLink();
         }
         try {
-            mainPage.checkH1MarketOverviewMarketOverviewText();
+            leftMenu.checkH1MarketOverviewMarketOverviewText();
         } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.checkH1MarketOverviewMarketOverviewText();
+            leftMenu.checkH1MarketOverviewMarketOverviewText();
         }
     }
 

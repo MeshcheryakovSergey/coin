@@ -1,7 +1,8 @@
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.Before;
 import org.junit.Test;
-import page.MainPage;
+import page.main.MainPage;
+import page.main.Header;
 
 public class OpenMeinPage extends DriverRule{
 
@@ -14,15 +15,18 @@ public class OpenMeinPage extends DriverRule{
     @Test
     @DisplayName("Success open Cryptocurrencies")
     public void successOpenCryptocurrencies(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.clickDexScanButton();
-        try {mainPage.clickCryptocurrenciesButton();}
+        Header header = new Header(driver);
+        try {header.clickDexScanButton();}
         catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.clickCryptocurrenciesButton();
+            header.clickDexScanButton();
         }
-        try {mainPage.checkH1MainTitleText();}
+        try {header.dexClickCryptocurrenciesButton();}
         catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.checkH1MainTitleText();
+            header.dexClickCryptocurrenciesButton();
+        }
+        try {header.checkH1MainTitleText();}
+        catch (org.openqa.selenium.StaleElementReferenceException e) {
+            header.checkH1MainTitleText();
         }
     }
 

@@ -1,11 +1,11 @@
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import page.MainPage;
+import page.main.Header;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import page.main.MainPage;
 
 import java.time.Duration;
 
@@ -20,149 +20,167 @@ public class MainHeader extends DriverRule{
     @Test
     @DisplayName("Check text on Cryptocurrencies button")
     public void checkTextOnCryptocurrenciesButton(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.checkCryptocurrenciesButtonText();
+        Header header = new Header(driver);
+        header.checkCryptocurrenciesButtonText();
     }
 
     @Test
     @DisplayName("Success open Cryptocurrencies")
     public void successOpenCryptocurrencies(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.clickDexScanButton();
-        try {mainPage.clickCryptocurrenciesButton();}
-            catch (org.openqa.selenium.StaleElementReferenceException e) {
-                mainPage.clickCryptocurrenciesButton();
-            }
-        try {mainPage.checkH1MainTitleText();}
+        Header header = new Header(driver);
+        try {header.clickDexScanButton();}
         catch (org.openqa.selenium.StaleElementReferenceException e) {
-            mainPage.checkH1MainTitleText();
+            header.clickDexScanButton();
+        }
+        try {header.dexClickCryptocurrenciesButton();}
+        catch (org.openqa.selenium.StaleElementReferenceException e) {
+            header.dexClickCryptocurrenciesButton();
+        }
+        try {header.checkH1MainTitleText();}
+        catch (org.openqa.selenium.StaleElementReferenceException e) {
+            header.checkH1MainTitleText();
         }
     }
 
     @Test
     @DisplayName("Check text on DexScan button")
     public void checkTextOnDexScanButton(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.checkDexScanButtonText();
+        Header header = new Header(driver);
+        header.checkDexScanButtonText();
     }
+
+
     @Test
     @DisplayName("Success open DexScan")
     public void successOpenDexScan(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.clickDexScanButton();
+        Header header = new Header(driver);
+        try {header.clickDexScanButton();}
+        catch (org.openqa.selenium.StaleElementReferenceException e) {
+            header.clickDexScanButton();
+        }
     }
 
     @Test
     @DisplayName("Check text on Exchanges button")
     public void checkTextOnExchangesButton(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.checkExchangesButtonText();
+        Header header = new Header(driver);
+        header.checkExchangesButtonText();
     }
+
     @Test
     @DisplayName("Success open Exchanges")
     public void successOpenExchanges(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.clickExchangesButton();
+        Header header = new Header(driver);
+        try {header.clickExchangesButton();}
+        catch (org.openqa.selenium.StaleElementReferenceException e) {
+            header.clickExchangesButton();
+        }
     }
 
     @Test
     @DisplayName("Check text on Community button")
     public void checkTextOnCommunityButton(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.checkCommunityButtonText();
+        Header header = new Header(driver);
+        header.checkCommunityButtonText();
     }
+
     @Test
     @DisplayName("Success open Community")
     public void successOpenCommunity(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.clickCommunityButton();
+        Header header = new Header(driver);
+        try {header.clickCommunityButton();}
+        catch (org.openqa.selenium.StaleElementReferenceException e) {
+            header.clickCommunityButton();
+        }
     }
 
     @Test
     @DisplayName("Check text on Products button")
     public void checkTextOnProductsButton(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.checkProductsButtonText();
+        Header header = new Header(driver);
+        header.checkProductsButtonText();
     }
+
     @Test
     @DisplayName("Success open Products")
     public void successOpenProducts(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.clickProductsButton();
+        Header header = new Header(driver);
+        header.clickProductsButton();
     }
 
     @Test
     @DisplayName("Check text on Portfolio button")
     public void checkTextOnPortfolioButton(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.checkPortfolioButtonText();
+        Header header = new Header(driver);
+        header.checkPortfolioButtonText();
     }
 
     @Test
     @DisplayName("Success open Portfolio")
     public void successOpenPortfolio(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.clickPortfolioButton();
+        Header header = new Header(driver);
+        header.clickPortfolioButton();
     }
 
     @Test
     @DisplayName("Check text on Watchlist button")
     public void checkTextOnWatchlistButton(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.checkWatchlistButtonText();
+        Header header = new Header(driver);
+        header.checkWatchlistButtonText();
     }
+
     @Test
     @DisplayName("Success open Watchlist")
     public void successOpenWatchlist(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.clickWatchlistButton();
+        Header header = new Header(driver);
+        header.clickWatchlistButton();
     }
 
     @Test
     @DisplayName("Check text on Search string")
     public void checkTextOnSearchString(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.checkSearchStringText();
+        Header header = new Header(driver);
+        header.checkSearchStringText();
     }
 
     @Test
     @DisplayName("Success open Search string")
     public void successOpenSearchString(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.clickSearchString();
-        mainPage.checkOpeningSearchStringForm();
+        Header header = new Header(driver);
+        header.clickSearchString();
+        header.checkOpeningSearchStringForm();
     }
 
     @Test
     @DisplayName("Success open App QR Code")
     public void successOpenAppQrCode(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.clickAppQrCode();
+        Header header = new Header(driver);
+        header.clickAppQrCode();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement modalWindow = wait.until(ExpectedConditions.visibilityOfElementLocated(mainPage.getAppQrCodeText()));
-        mainPage.checkAppQrCodeText();
+        WebElement modalWindow = wait.until(ExpectedConditions.visibilityOfElementLocated(header.getAppQrCodeText()));
+        header.checkAppQrCodeText();
     }
 
     @Test
     @DisplayName("Success open LogIn Modal")
     public void successOpenLogInModal(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.clickLogInButton();
-        mainPage.checkTextInLogInModal();
+        Header header = new Header(driver);
+        header.clickLogInButton();
+        header.checkTextInLogInModal();
     }
 
     @Test
     @DisplayName("Success open user dropdown")
     public void successOpenUserDropdown(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.clickUserMenu();
-        mainPage.clickLightButtonInUserMenu();
+        Header header = new Header(driver);
+        header.clickUserMenu();
+        header.clickLightButtonInUserMenu();
     }
 
     @Test
     @DisplayName("Count left side menu")
     public void countLeftMenuButtonSize(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.checkMenuButtonSize();
+        Header header = new Header(driver);
+        header.checkMenuButtonSize();
     }
 }
