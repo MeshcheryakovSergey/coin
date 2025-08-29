@@ -12,8 +12,7 @@ import util.ApiSpecBuilder;
 
 import java.time.Duration;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.matchesPattern;
+import static org.hamcrest.Matchers.*;
 
 public class CoinStatsScroll {
 
@@ -74,17 +73,19 @@ public class CoinStatsScroll {
 
     //nav-wrapper
     public final static By coinNavChart = By.cssSelector("div[class*='cdp-navbar-scroll-container']>div:first-child span");
-    public final static By coinNavChartHelp = By.cssSelector("div[data-test='section-chart']>div>div>div:first-child  li[data-index='tab-price'] b>h5");
+    public final static By coinNavChartHelp = By.cssSelector("div[data-test='section-chart'] div[class*='fadestyle-gradient']:first-child li[data-index='tab-marketCap']>div>div>h5");
     public final static By coinNavMarkets = By.cssSelector("div[class*='cdp-navbar-scroll-container']>div:nth-child(2)  span");
-    public final static By coinNavMarketsHelp = By.cssSelector("div[data-test='section-markets'] h2");
+    public final static By coinNavMarketsHelp = By.cssSelector("li[data-index='tab-cex'] div[class*='tab-inner-label']>div>h5");
     public final static By coinNavNews = By.cssSelector("div[class*='cdp-navbar-scroll-container']>div:nth-child(3)  span");
-    public final static By coinNavNewsHelp = By.cssSelector("div[data-module-name='Coin-News'] h2");
+    public final static By coinNavNewsHelp = By.cssSelector("li[data-index='tab-latest'] div[class*='tab-inner-label']>div>h5");
     public final static By coinNavYield = By.cssSelector("div[class*='cdp-navbar-scroll-container']>div:nth-child(4)  span");
-    public final static By coinNavYieldHelp = By.cssSelector("div[data-test='section-yields'] h3");
+    public final static By coinNavYieldHelp = By.cssSelector("li[data-index='tab-defi'] div[class*='tab-inner-label']>div>h5");
     public final static By coinNavMarketCycles = By.cssSelector("div[class*='cdp-navbar-scroll-container']>div:nth-child(5)  span");
-    public final static By coinNavMarketCyclesHelp = By.cssSelector("div[data-test='section-market-cycles']>div>div>span[class*='base-text']");
+    public final static By coinNavMarketCyclesHelp = By.cssSelector("div[data-test='section-market-cycles']>div>div>a");
+    public final static By pageCryptoMarketCycleIndicatorsTitle = By.cssSelector("div[class='grid']>div>div:nth-child(2)>div>div>div>div");
+
     public final static By coinNavAbout = By.cssSelector("div[class*='cdp-navbar-scroll-container']>div:nth-child(6)  span");
-    public final static By coinNavAboutHelp = By.cssSelector("div[data-test='section-about'] h2");
+    public final static By coinNavAboutHelp = By.cssSelector("div[class='mobile-coin-video-wrapper']>section>div>div:first-child div[class*='top']>div[class*='right']");
 
 
 
@@ -722,8 +723,7 @@ public class CoinStatsScroll {
                         MatcherAssert.assertThat(textP4, equalTo("More about the CoinMarketCap API"));
                         break;
                     }
-                } catch (org.openqa.selenium.StaleElementReferenceException e) {
-                }
+                } catch (org.openqa.selenium.StaleElementReferenceException e) {}
             }
         } catch (Exception e) {
             System.err.println("Произошла ошибка, не связанная с StaleElement: " + e.getMessage());
@@ -736,8 +736,28 @@ public class CoinStatsScroll {
     }
 
     @Step
-    public void checkChartTabMark() {
-        driver.findElement(coinNavChartHelp).click();
+    public void checkOpenChartTab() {
+        for (int i = 0; i < 3; i++) {
+            try {
+                driver.findElement(coinNavChartHelp).click();
+                break;
+            } catch (org.openqa.selenium.StaleElementReferenceException e) {}
+        }
+    }
+
+    @Step
+    public void clickMarketsTab() {
+        driver.findElement(coinNavMarkets).click();
+    }
+
+    @Step
+    public void checkOpenMarketsTab() {
+        for (int i = 0; i < 3; i++) {
+            try {
+                driver.findElement(coinNavMarketsHelp).click();
+                break;
+            } catch (org.openqa.selenium.StaleElementReferenceException e) {}
+        }
     }
 
     @Step
@@ -746,8 +766,13 @@ public class CoinStatsScroll {
     }
 
     @Step
-    public void checkNewsTabMark() {
-        driver.findElement(coinNavNewsHelp).click();
+    public void checkOpenNewsTab() {
+        for (int i = 0; i < 3; i++) {
+            try {
+                driver.findElement(coinNavNewsHelp).click();
+                break;
+            } catch (org.openqa.selenium.StaleElementReferenceException e) {}
+        }
     }
 
     @Step
@@ -756,16 +781,30 @@ public class CoinStatsScroll {
     }
 
     @Step
-    public void checkYieldTabMark() {
+    public void checkOpenYieldTab() {
+        for (int i = 0; i < 3; i++) {
+            try {
+                driver.findElement(coinNavYieldHelp).click();
+                break;
+            } catch (org.openqa.selenium.StaleElementReferenceException e) {}
+        }
     }
 
     @Step
-    public void clickCyclesTab() {
+    public void clickMarketCyclesTab() {
         driver.findElement(coinNavMarketCycles).click();
     }
 
     @Step
-    public void checkMarketTabMark() {
+    public void checkOpenMarketCyclesTab() {
+        for (int i = 0; i < 3; i++) {
+            try {
+                driver.findElement(coinNavMarketCyclesHelp).click();
+                break;
+            } catch (org.openqa.selenium.StaleElementReferenceException e) {}
+        }
+        String text = driver.findElement(pageCryptoMarketCycleIndicatorsTitle).getText();
+        MatcherAssert.assertThat(text, containsString("Crypto Market Cycle Indicators"));
     }
 
     @Step
@@ -774,7 +813,13 @@ public class CoinStatsScroll {
     }
 
     @Step
-    public void checkAboutTabMark() {
+    public void checkOpenAboutTab() {
+        for (int i = 0; i < 3; i++) {
+            try {
+                driver.findElement(coinNavAboutHelp).click();
+                break;
+            } catch (org.openqa.selenium.StaleElementReferenceException e) {}
+        }
     }
 
 

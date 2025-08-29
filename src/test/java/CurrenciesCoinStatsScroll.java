@@ -411,4 +411,65 @@ public class CurrenciesCoinStatsScroll extends DriverRule{
         coinStats.checkInfoLinkUCIDPopoverText();
     }
 
+    @Test
+    @DisplayName("Check open Chart Tab")
+    public void checkOpenChartTab(){
+        MainPage mainPage = new MainPage(driver);
+        mainPage.clickFirstCoin();
+        CoinStatsScroll coinStats = new CoinStatsScroll(driver);
+        coinStats.clickMarketCyclesTab();
+        coinStats.clickChartTab();
+        coinStats.checkOpenChartTab();
+    }
+
+    @Test
+    @DisplayName("Check open Markets Tab")
+    public void checkOpenMarketsTab(){
+        MainPage mainPage = new MainPage(driver);
+        mainPage.clickFirstCoin();
+        CoinStatsScroll coinStats = new CoinStatsScroll(driver);
+        coinStats.clickMarketsTab();
+        coinStats.checkOpenMarketsTab();
+    }
+
+    @Test
+    @DisplayName("Check open News Tab")
+    public void checkOpenNewsTab(){
+        MainPage mainPage = new MainPage(driver);
+        mainPage.clickFirstCoin();
+        CoinStatsScroll coinStats = new CoinStatsScroll(driver);
+        coinStats.clickNewsTab();
+        coinStats.checkOpenNewsTab();
+    }
+
+    @Test
+    @DisplayName("Check open Yield Tab")
+    public void checkOpenYieldTab(){
+        MainPage mainPage = new MainPage(driver);
+        mainPage.clickFirstCoin();
+        CoinStatsScroll coinStats = new CoinStatsScroll(driver);
+        coinStats.clickYieldTab();
+        coinStats.checkOpenYieldTab();
+    }
+
+    @Test
+    @DisplayName("Check open Market Cycles Tab")
+    public void checkOpenMarketCyclesTab(){
+        MainPage mainPage = new MainPage(driver);
+        mainPage.clickFirstCoin();
+        CoinStatsScroll coinStats = new CoinStatsScroll(driver);
+        coinStats.clickMarketCyclesTab();
+        coinStats.checkOpenMarketCyclesTab();
+    }
+
+    @Test
+    @DisplayName("Check open About Tab")
+    public void checkOpenAboutTab(){
+        MainPage mainPage = new MainPage(driver);
+        mainPage.clickFirstCoin();
+        CoinStatsScroll coinStats = new CoinStatsScroll(driver);
+        coinStats.clickAboutTab();
+        coinStats.checkOpenAboutTab();
+    }
+
 }
