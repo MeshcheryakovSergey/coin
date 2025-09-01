@@ -128,28 +128,29 @@ public class CoinStatsScroll {
 
     @Step
     public void checkCoinNumToolTipText(){
-        try { WebElement coinNumText = driver.findElement(coinNumAria);
-            Actions actions = new Actions(driver);
-            actions.moveToElement(coinNumText).perform();
-            String styleAttribute = coinNumText.getAttribute("aria-describedby");
-            if (styleAttribute != null && !styleAttribute.isEmpty()) {
-                WebElement descriptionElement = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"']>div>div>div"));
-                String text = descriptionElement.getText();
-                String regexPattern = "^Ranked 1st out of all \\d{1,3}(?:,\\d{3})* active cryptocurrencies listed on CoinMarketCap\\.$";
-                MatcherAssert.assertThat(text, matchesPattern(regexPattern));
+        try {
+            for (int i = 0; i < 3; i++) {
+                try {
+                    WebElement coinNumText = driver.findElement(coinNumAria);
+                    Actions actions = new Actions(driver);
+                    actions.moveToElement(coinNumText).perform();
+                    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                    wait.until(ExpectedConditions.attributeToBeNotEmpty(coinNumText, "aria-describedby"));
+                    String styleAttribute = coinNumText.getAttribute("aria-describedby");
+                    if (styleAttribute != null) {
+                        WebElement descriptionElement = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"']>div>div>div"));
+                        String text = descriptionElement.getText();
+                        String regexPattern = "^Ranked 1st out of all \\d{1,3}(?:,\\d{3})* active cryptocurrencies listed on CoinMarketCap\\.$";
+                        MatcherAssert.assertThat(text, matchesPattern(regexPattern));
+                        break;
+                    }
+                } catch (org.openqa.selenium.StaleElementReferenceException e) {
+                }
             }
-        } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            WebElement coinNumText = driver.findElement(coinNumAria);
-            Actions actions = new Actions(driver);
-            actions.moveToElement(coinNumText).perform();
-            String styleAttribute = coinNumText.getAttribute("aria-describedby");
-            if (styleAttribute != null && !styleAttribute.isEmpty()) {
-                WebElement descriptionElement = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"']>div>div>div"));
-                String text = descriptionElement.getText();
-                String regexPattern = "^Ranked 1st out of all \\d{1,3}(?:,\\d{3})* active cryptocurrencies listed on CoinMarketCap\\.$";
-                MatcherAssert.assertThat(text, matchesPattern(regexPattern));
-            }
+        } catch (Exception e) {
+            System.err.println("Произошла ошибка, не связанная с StaleElement: " + e.getMessage());
         }
+        throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
     }
 
     @Step
@@ -168,52 +169,55 @@ public class CoinStatsScroll {
 
     @Step
     public void checkWatchlistToolTipTextP1(){
-        try { WebElement watchlistText = driver.findElement(coinWatchlistPlace);
-            Actions actions = new Actions(driver);
-            actions.moveToElement(watchlistText).perform();
-            String styleAttribute = watchlistText.getAttribute("aria-describedby");
-            if (styleAttribute != null && !styleAttribute.isEmpty()) {
-                WebElement descriptionElement = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"']>div>div>div>div span:first-child "));
-                String text = descriptionElement.getText();
-                MatcherAssert.assertThat(text, equalTo("Add Bitcoin to your watchlist."));
+        try {
+            for (int i = 0; i < 3; i++) {
+                try {
+                    WebElement watchlistText = driver.findElement(coinWatchlistPlace);
+                    Actions actions = new Actions(driver);
+                    actions.moveToElement(watchlistText).perform();
+                    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                    wait.until(ExpectedConditions.attributeToBeNotEmpty(watchlistText, "aria-describedby"));
+                    String styleAttribute = watchlistText.getAttribute("aria-describedby");
+                    if (styleAttribute != null) {
+                        WebElement descriptionElement = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"']>div>div>div>div span:first-child "));
+                        String text = descriptionElement.getText();
+                        MatcherAssert.assertThat(text, equalTo("Add Bitcoin to your watchlist."));
+                        break;
+                    }
+                } catch (org.openqa.selenium.StaleElementReferenceException e) {
+                }
             }
-        } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            WebElement watchlistText = driver.findElement(coinWatchlistPlace);
-            Actions actions = new Actions(driver);
-            actions.moveToElement(watchlistText).perform();
-            String styleAttribute = watchlistText.getAttribute("aria-describedby");
-            if (styleAttribute != null && !styleAttribute.isEmpty()) {
-                WebElement descriptionElement = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"']>div>div>div>div span:first-child "));
-                String text = descriptionElement.getText();
-                MatcherAssert.assertThat(text, equalTo("Add Bitcoin to your watchlist."));
-            }
+        } catch (Exception e) {
+            System.err.println("Произошла ошибка, не связанная с StaleElement: " + e.getMessage());
         }
+        throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
     }
 
     @Step
     public void checkWatchlistToolTipTextP2(){
-        try { WebElement watchlistText = driver.findElement(coinWatchlistPlace);
-            Actions actions = new Actions(driver);
-            actions.moveToElement(watchlistText).perform();
-            String styleAttribute = watchlistText.getAttribute("aria-describedby");
-            if (styleAttribute != null && !styleAttribute.isEmpty()) {
-                WebElement descriptionElement = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"']>div>div>div>div span:nth-child(2)"));
-                String text = descriptionElement.getText();
-                String regexPattern = "^\\dM watchlists on CoinMarketCap include Bitcoin\\.$";
-                MatcherAssert.assertThat(text, matchesPattern(regexPattern));
-            }
-        } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            WebElement watchlistText = driver.findElement(coinWatchlistPlace);
-            Actions actions = new Actions(driver);
-            actions.moveToElement(watchlistText).perform();
-            String styleAttribute = watchlistText.getAttribute("aria-describedby");
-            if (styleAttribute != null && !styleAttribute.isEmpty()) {
-                WebElement descriptionElement = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"']>div>div>div>div span:nth-child(2)"));
-                String text = descriptionElement.getText();
-                String regexPattern = "^\\dM watchlists on CoinMarketCap include Bitcoin\\.$";
-                MatcherAssert.assertThat(text, matchesPattern(regexPattern));
+        try {
+            for (int i = 0; i < 3; i++) {
+                try {
+                    WebElement watchlistText = driver.findElement(coinWatchlistPlace);
+                    Actions actions = new Actions(driver);
+                    actions.moveToElement(watchlistText).perform();
+                    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                    wait.until(ExpectedConditions.attributeToBeNotEmpty(watchlistText, "aria-describedby"));
+                    String styleAttribute = watchlistText.getAttribute("aria-describedby");
+                    if (styleAttribute != null) {
+                        WebElement descriptionElement = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"']>div>div>div>div span:nth-child(2)"));
+                        String text = descriptionElement.getText();
+                        String regexPattern = "^\\dM watchlists on CoinMarketCap include Bitcoin\\.$";
+                        MatcherAssert.assertThat(text, matchesPattern(regexPattern));
+                        break;
+                    }
+                } catch (org.openqa.selenium.StaleElementReferenceException e) {
             }
         }
+    } catch (Exception e) {
+        System.err.println("Произошла ошибка, не связанная с StaleElement: " + e.getMessage());
+    }
+        throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
     }
 
     @Step
@@ -300,45 +304,38 @@ public class CoinStatsScroll {
     //проверил сразу 3 элемента
     @Step
     public void checkGroupItemMarketCapPopoverText(){
-        try { WebElement marketCapPopover = driver.findElement(coinMarketCapPopover);
-            Actions actions = new Actions(driver);
-            actions.moveToElement(marketCapPopover).perform();
-            String styleAttribute = marketCapPopover.getAttribute("aria-describedby");
-            if (styleAttribute != null && !styleAttribute.isEmpty()) {
-                WebElement descriptionElementP1 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-market-cap-explainer']>div:first-child"));
-                System.out.println("text: "+descriptionElementP1);
-                String textP1 = descriptionElementP1.getText();
-                System.out.println("text: "+textP1);
-                MatcherAssert.assertThat(textP1, equalTo("The total market value of a cryptocurrency's circulating supply. It is analogous to the free-float capitalization in the stock market."));
-                //хз почему nth-child(3), но так находит нужный элемент
-                WebElement descriptionElementP2 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-market-cap-explainer']>div:nth-child(3)"));
-                String textP2 = descriptionElementP2.getText();
-                MatcherAssert.assertThat(textP2, equalTo("Market cap = Current price x Circulating supply"));
-                WebElement descriptionElementP3 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-market-cap-explainer'] a"));
-                String textP3 = descriptionElementP3.getText();
-                MatcherAssert.assertThat(textP3, equalTo("More about market cap"));
+        try {
+            for (int i = 0; i < 3; i++) {
+                try {
+                    WebElement marketCapPopover = driver.findElement(coinMarketCapPopover);
+                    Actions actions = new Actions(driver);
+                    actions.moveToElement(marketCapPopover).perform();
+                    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                    wait.until(ExpectedConditions.attributeToBeNotEmpty(marketCapPopover, "aria-describedby"));
+                    String styleAttribute = marketCapPopover.getAttribute("aria-describedby");
+                    if (styleAttribute != null) {
+                        WebElement descriptionElementP1 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-market-cap-explainer']>div:first-child"));
+                        System.out.println("text: "+descriptionElementP1);
+                        String textP1 = descriptionElementP1.getText();
+                        System.out.println("text: "+textP1);
+                        MatcherAssert.assertThat(textP1, equalTo("The total market value of a cryptocurrency's circulating supply. It is analogous to the free-float capitalization in the stock market."));
+                        //хз почему nth-child(3), но так находит нужный элемент
+                        WebElement descriptionElementP2 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-market-cap-explainer']>div:nth-child(3)"));
+                        String textP2 = descriptionElementP2.getText();
+                        MatcherAssert.assertThat(textP2, equalTo("Market cap = Current price x Circulating supply"));
+                        WebElement descriptionElementP3 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-market-cap-explainer'] a"));
+                        String textP3 = descriptionElementP3.getText();
+                        MatcherAssert.assertThat(textP3, equalTo("More about market cap"));
+                        break;
+                    }
+                } catch (org.openqa.selenium.StaleElementReferenceException e) {
+                }
             }
-        } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            WebElement marketCapPopover = driver.findElement(coinMarketCapPopover);
-            Actions actions = new Actions(driver);
-            actions.moveToElement(marketCapPopover).perform();
-            String styleAttribute = marketCapPopover.getAttribute("aria-describedby");
-            if (styleAttribute != null && !styleAttribute.isEmpty()) {
-                WebElement descriptionElementP1 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-market-cap-explainer']>div:first-child"));
-                System.out.println("text: "+descriptionElementP1);
-                String textP1 = descriptionElementP1.getText();
-                System.out.println("text: "+textP1);
-                MatcherAssert.assertThat(textP1, equalTo("The total market value of a cryptocurrency's circulating supply. It is analogous to the free-float capitalization in the stock market."));
-                WebElement descriptionElementP2 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-market-cap-explainer']>div:nth-child(3)"));
-                String textP2 = descriptionElementP2.getText();
-                MatcherAssert.assertThat(textP2, equalTo("Market cap = Current price x Circulating supply"));
-                WebElement descriptionElementP3 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-market-cap-explainer'] a"));
-                String textP3 = descriptionElementP3.getText();
-                MatcherAssert.assertThat(textP3, equalTo("More about market cap"));
-            }
+        } catch (Exception e) {
+            System.err.println("Произошла ошибка, не связанная с StaleElement: " + e.getMessage());
         }
+        throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
     }
-
 
     @Step
     public void checkGroupItemVolumeText() {
@@ -348,157 +345,144 @@ public class CoinStatsScroll {
 
     @Step
     public void checkGroupItemVolumePopoverText(){
-        try { WebElement volumeCapPopover = driver.findElement(coinVolume24Popover);
-            Actions actions = new Actions(driver);
-            actions.moveToElement(volumeCapPopover).perform();
-            String styleAttribute = volumeCapPopover.getAttribute("aria-describedby");
-            if (styleAttribute != null && !styleAttribute.isEmpty()) {
-                WebElement descriptionElementP1 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-volume-explainer'] div"));
-                System.out.println("text: "+descriptionElementP1);
-                String textP1 = descriptionElementP1.getText();
-                System.out.println("text: "+textP1);
-                MatcherAssert.assertThat(textP1, equalTo("A measure of how much of a cryptocurrency was traded in the last 24 hours."));
-                WebElement descriptionElementP2 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-volume-explainer'] a"));
-                String textP2 = descriptionElementP2.getText();
-                MatcherAssert.assertThat(textP2, equalTo("Read More"));
+        try {
+            for (int i = 0; i < 3; i++) {
+                try {
+                    WebElement volumeCapPopover = driver.findElement(coinVolume24Popover);                    Actions actions = new Actions(driver);
+                    actions.moveToElement(volumeCapPopover).perform();
+                    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                    wait.until(ExpectedConditions.attributeToBeNotEmpty(volumeCapPopover, "aria-describedby"));
+                    String styleAttribute = volumeCapPopover.getAttribute("aria-describedby");
+                    if (styleAttribute != null) {
+                        WebElement descriptionElementP1 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-volume-explainer'] div"));
+                        System.out.println("text: "+descriptionElementP1);
+                        String textP1 = descriptionElementP1.getText();
+                        System.out.println("text: "+textP1);
+                        MatcherAssert.assertThat(textP1, equalTo("A measure of how much of a cryptocurrency was traded in the last 24 hours."));
+                        WebElement descriptionElementP2 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-volume-explainer'] a"));
+                        String textP2 = descriptionElementP2.getText();
+                        MatcherAssert.assertThat(textP2, equalTo("Read More"));
+                        break;
+                    }
+                } catch (org.openqa.selenium.StaleElementReferenceException e) {
+                }
             }
-        } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            WebElement volumeCapPopover = driver.findElement(coinVolume24Popover);
-            Actions actions = new Actions(driver);
-            actions.moveToElement(volumeCapPopover).perform();
-            String styleAttribute = volumeCapPopover.getAttribute("aria-describedby");
-            if (styleAttribute != null && !styleAttribute.isEmpty()) {
-                WebElement descriptionElementP1 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-volume-explainer'] div"));
-                System.out.println("text: "+descriptionElementP1);
-                String textP1 = descriptionElementP1.getText();
-                System.out.println("text: "+textP1);
-                MatcherAssert.assertThat(textP1, equalTo("A measure of how much of a cryptocurrency was traded in the last 24 hours."));
-                WebElement descriptionElementP2 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-volume-explainer'] a"));
-                String textP2 = descriptionElementP2.getText();
-                MatcherAssert.assertThat(textP2, equalTo("Read More"));
-            }
+        } catch (Exception e) {
+            System.err.println("Произошла ошибка, не связанная с StaleElement: " + e.getMessage());
         }
+        throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
     }
 
     @Step
     public void checkGroupItemFDVText() {
-            String text = driver.findElement(coinFDV).getText();
-            MatcherAssert.assertThat(text, equalTo("FDV"));
+        String text = driver.findElement(coinFDV).getText();
+        MatcherAssert.assertThat(text, equalTo("FDV"));
     }
 
     @Step
     public void checkGroupItemFDVPopoverText(){
-        try { WebElement fdvPopover = driver.findElement(coinFDVPopover);
-            Actions actions = new Actions(driver);
-            actions.moveToElement(fdvPopover).perform();
-            String styleAttribute = fdvPopover.getAttribute("aria-describedby");
-            if (styleAttribute != null && !styleAttribute.isEmpty()) {
-                WebElement descriptionElementP1 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-fully-diluted-mcap-explainer'] div:first-child"));
-                System.out.println("text: "+descriptionElementP1);
-                String textP1 = descriptionElementP1.getText();
-                System.out.println("text: "+textP1);
-                MatcherAssert.assertThat(textP1, equalTo("The market cap if the max supply was in circulation."));
-                WebElement descriptionElementP2 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-volume-explainer'] div:nth-child(3)"));
-                String textP2 = descriptionElementP2.getText();
-                MatcherAssert.assertThat(textP2, equalTo("Fully-diluted value (FDV) = price x max supply. If max supply is null, FDV = price x total supply. if max supply and total supply are infinite or not available, fully-diluted market cap shows - -."));
+        try {
+            for (int i = 0; i < 3; i++) {
+                try {
+                    WebElement fdvPopover = driver.findElement(coinFDVPopover);
+                    Actions actions = new Actions(driver);
+                    actions.moveToElement(fdvPopover).perform();
+                    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                    wait.until(ExpectedConditions.attributeToBeNotEmpty(fdvPopover, "aria-describedby"));
+                    String styleAttribute = fdvPopover.getAttribute("aria-describedby");
+                    if (styleAttribute != null) {
+                        WebElement descriptionElementP1 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-fully-diluted-mcap-explainer'] div:first-child"));
+                        System.out.println("text: "+descriptionElementP1);
+                        String textP1 = descriptionElementP1.getText();
+                        System.out.println("text: "+textP1);
+                        MatcherAssert.assertThat(textP1, equalTo("The market cap if the max supply was in circulation."));
+                        WebElement descriptionElementP2 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-volume-explainer'] div:nth-child(3)"));
+                        String textP2 = descriptionElementP2.getText();
+                        MatcherAssert.assertThat(textP2, equalTo("Fully-diluted value (FDV) = price x max supply. If max supply is null, FDV = price x total supply. if max supply and total supply are infinite or not available, fully-diluted market cap shows - -."));
+                        break;
+                    }
+                } catch (org.openqa.selenium.StaleElementReferenceException e) {
+                }
             }
-        } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            WebElement fdvPopover = driver.findElement(coinFDVPopover);
-            Actions actions = new Actions(driver);
-            actions.moveToElement(fdvPopover).perform();
-            String styleAttribute = fdvPopover.getAttribute("aria-describedby");
-            if (styleAttribute != null && !styleAttribute.isEmpty()) {
-                WebElement descriptionElementP1 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-fully-diluted-mcap-explainer'] div:first-child"));
-                System.out.println("text: "+descriptionElementP1);
-                String textP1 = descriptionElementP1.getText();
-                System.out.println("text: "+textP1);
-                MatcherAssert.assertThat(textP1, equalTo("The market cap if the max supply was in circulation."));
-                WebElement descriptionElementP2 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-volume-explainer'] div:nth-child(3)"));
-                String textP2 = descriptionElementP2.getText();
-                MatcherAssert.assertThat(textP2, equalTo("Fully-diluted value (FDV) = price x max supply. If max supply is null, FDV = price x total supply. if max supply and total supply are infinite or not available, fully-diluted market cap shows - -."));
-            }
+        } catch (Exception e) {
+            System.err.println("Произошла ошибка, не связанная с StaleElement: " + e.getMessage());
         }
+        throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
     }
 
     @Step
     public void checkGroupItemVolMktCapText() {
-        String text = driver.findElement(coinVolMktCap24).getText();
-        MatcherAssert.assertThat(text, equalTo("Vol/Mkt Cap (24h)"));
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(coinVolMktCap24));
+                String text = element.getText();
+                MatcherAssert.assertThat(text, equalTo("Vol/Mkt Cap (24h)"));
     }
 
     @Step
     public void checkGroupItemVolMktCapPopoverText(){
-        try {WebElement volMktCapPopover = driver.findElement(coinVolMktCap24Popover);
-            Actions actions = new Actions(driver);
-            actions.moveToElement(volMktCapPopover).perform();
-            String styleAttribute = volMktCapPopover.getAttribute("aria-describedby");
-            if (styleAttribute != null && !styleAttribute.isEmpty()) {
-                WebElement descriptionElementP1 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-volume-mcap-explainer'] div:first-child"));
-                String textP1 = descriptionElementP1.getText();
-                MatcherAssert.assertThat(textP1, equalTo("Indicator of liquidity. The higher the ratio, the more liquid the cryptocurrency is, which should make it easier for it to be bought/sold on an exchange close to its value."));
-                WebElement descriptionElementP2 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-volume-mcap-explainer'] div:nth-child(2)"));
-                String textP2 = descriptionElementP2.getText();
-                MatcherAssert.assertThat(textP2, equalTo("Cryptocurrencies with a low ratio are less liquid and most likely present less stable markets."));
+        try {
+            for (int i = 0; i < 3; i++) {
+                try {
+                    WebElement volMktCapPopover = driver.findElement(coinVolMktCap24Popover);
+                    Actions actions = new Actions(driver);
+                    actions.moveToElement(volMktCapPopover).perform();
+                    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                    wait.until(ExpectedConditions.attributeToBeNotEmpty(volMktCapPopover, "aria-describedby"));
+                    String styleAttribute = volMktCapPopover.getAttribute("aria-describedby");
+                    if (styleAttribute != null) {
+                        WebElement descriptionElementP1 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-volume-mcap-explainer'] div:first-child"));
+                        String textP1 = descriptionElementP1.getText();
+                        MatcherAssert.assertThat(textP1, equalTo("Indicator of liquidity. The higher the ratio, the more liquid the cryptocurrency is, which should make it easier for it to be bought/sold on an exchange close to its value."));
+                        WebElement descriptionElementP2 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-volume-mcap-explainer'] div:nth-child(2)"));
+                        String textP2 = descriptionElementP2.getText();
+                        MatcherAssert.assertThat(textP2, equalTo("Cryptocurrencies with a low ratio are less liquid and most likely present less stable markets."));
+                        break;
+                    }
+                } catch (org.openqa.selenium.StaleElementReferenceException e) {
+                }
             }
-        } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            WebElement volMktCapPopover = driver.findElement(coinVolMktCap24Popover);
-            Actions actions = new Actions(driver);
-            actions.moveToElement(volMktCapPopover).perform();
-            String styleAttribute = volMktCapPopover.getAttribute("aria-describedby");
-            if (styleAttribute != null && !styleAttribute.isEmpty()) {
-                WebElement descriptionElementP1 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-volume-mcap-explainer'] div:first-child"));
-                System.out.println("text: "+descriptionElementP1);
-                String textP1 = descriptionElementP1.getText();
-                System.out.println("text: "+textP1);
-                MatcherAssert.assertThat(textP1, equalTo("Indicator of liquidity. The higher the ratio, the more liquid the cryptocurrency is, which should make it easier for it to be bought/sold on an exchange close to its value."));
-                WebElement descriptionElementP2 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-volume-mcap-explainer'] div:nth-child(2)"));
-                String textP2 = descriptionElementP2.getText();
-                MatcherAssert.assertThat(textP2, equalTo("Cryptocurrencies with a low ratio are less liquid and most likely present less stable markets."));
-            }
+        } catch (Exception e) {
+            System.err.println("Произошла ошибка, не связанная с StaleElement: " + e.getMessage());
         }
+        throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
     }
 
     @Step
     public void checkGroupItemTotalSupplyText() {
         //не получается найти элемент на странице, пришлось использовать ожидание
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(coinTotalSupply));
-        String text = element.getText();
-            MatcherAssert.assertThat(text, equalTo("Total supply"));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(coinTotalSupply));
+        String text = driver.findElement(coinTotalSupply).getText();
+        MatcherAssert.assertThat(text, equalTo("Total supply"));
     }
 
     @Step
     public void checkGroupItemTotalSupplyPopoverText(){
-        try {WebElement totalSupplyPopover = driver.findElement(coinTotalSupplyPopover);
-            Actions actions = new Actions(driver);
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(coinTotalSupplyPopover));
-            actions.moveToElement(totalSupplyPopover).perform();
-            String styleAttribute = totalSupplyPopover.getAttribute("aria-describedby");
-            if (styleAttribute != null && !styleAttribute.isEmpty()) {
-                WebElement descriptionElementP1 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-total-supply-explainer'] div:first-child"));
-                String textP1 = descriptionElementP1.getText();
-                MatcherAssert.assertThat(textP1, equalTo("Total supply = Total coins created - coins that have been burned (if any) It is comparable to outstanding shares in the stock market."));
-                WebElement descriptionElementP2 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-total-supply-explainer'] div:nth-child(3)"));
-                String textP2 = descriptionElementP2.getText();
-                MatcherAssert.assertThat(textP2, equalTo("If the project did not submit this data nor was it verified by CoinMarketCap, total supply shows “--”."));
+        try {
+            for (int i = 0; i < 3; i++) {
+                try {
+                    WebElement totalSupplyPopover = driver.findElement(coinTotalSupplyPopover);
+                    Actions actions = new Actions(driver);
+                    actions.moveToElement(totalSupplyPopover).perform();
+                    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                    wait.until(ExpectedConditions.attributeToBeNotEmpty(totalSupplyPopover, "aria-describedby"));
+                    String styleAttribute = totalSupplyPopover.getAttribute("aria-describedby");
+                    if (styleAttribute != null) {
+                        WebElement descriptionElementP1 = driver.findElement(By.cssSelector("div[id*='" + styleAttribute + "'] div[data-test='tooltip-total-supply-explainer'] div:first-child"));
+                        String textP1 = descriptionElementP1.getText();
+                        MatcherAssert.assertThat(textP1, equalTo("Total supply = Total coins created - coins that have been burned (if any) It is comparable to outstanding shares in the stock market."));
+                        WebElement descriptionElementP2 = driver.findElement(By.cssSelector("div[id*='" + styleAttribute + "'] div[data-test='tooltip-total-supply-explainer'] div:nth-child(3)"));
+                        String textP2 = descriptionElementP2.getText();
+                        MatcherAssert.assertThat(textP2, equalTo("If the project did not submit this data nor was it verified by CoinMarketCap, total supply shows “--”."));
+                        break;
+                    }
+                } catch (org.openqa.selenium.StaleElementReferenceException e) {
+                }
             }
-        } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            WebElement totalSupplyPopover = driver.findElement(coinTotalSupplyPopover);
-            Actions actions = new Actions(driver);
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(coinTotalSupplyPopover));
-            actions.moveToElement(totalSupplyPopover).perform();
-            String styleAttribute = totalSupplyPopover.getAttribute("aria-describedby");
-            if (styleAttribute != null && !styleAttribute.isEmpty()) {
-                WebElement descriptionElementP1 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-total-supply-explainer'] div:first-child"));
-                String textP1 = descriptionElementP1.getText();
-                MatcherAssert.assertThat(textP1, equalTo("Total supply = Total coins created - coins that have been burned (if any) It is comparable to outstanding shares in the stock market."));
-                WebElement descriptionElementP2 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-total-supply-explainer'] div:nth-child(3)"));
-                String textP2 = descriptionElementP2.getText();
-                MatcherAssert.assertThat(textP2, equalTo("If the project did not submit this data nor was it verified by CoinMarketCap, total supply shows “--”."));
-            }
+        } catch (Exception e) {
+            System.err.println("Произошла ошибка, не связанная с StaleElement: " + e.getMessage());
         }
+        throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
     }
 
 
@@ -512,32 +496,31 @@ public class CoinStatsScroll {
 
     @Step
     public void checkGroupItemMaxSupplyPopoverText(){
-        try {WebElement maxSupplyPopover = driver.findElement(coinMaxSupplyPopover);
-            Actions actions = new Actions(driver);
-            actions.moveToElement(maxSupplyPopover).perform();
-            String styleAttribute = maxSupplyPopover.getAttribute("aria-describedby");
-            if (styleAttribute != null) {
-                WebElement descriptionElementP1 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-max-supply-explainer'] div:first-child"));
-                String textP1 = descriptionElementP1.getText();
-                MatcherAssert.assertThat(textP1, equalTo("The best approximation of the maximum amount of coins that will exist in the forthcoming lifespan of the cryptocurrency, minus any coins that have been verifiably burned. This is also known as the theoretical max number of coins that can be minted, minus any coins that have been verifiably burned."));
-                WebElement descriptionElementP2 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-max-supply-explainer'] div:nth-child(3)"));
-                String textP2 = descriptionElementP2.getText();
-                MatcherAssert.assertThat(textP2, equalTo("If the project did not submit this data nor was it verified by CoinMarketCap, max. supply shows \"--\"."));
+        try {
+            for (int i = 0; i < 3; i++) {
+                try {
+                    WebElement maxSupplyPopover = driver.findElement(coinMaxSupplyPopover);
+                    Actions actions = new Actions(driver);
+                    actions.moveToElement(maxSupplyPopover).perform();
+                    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                    wait.until(ExpectedConditions.attributeToBeNotEmpty(maxSupplyPopover, "aria-describedby"));
+                    String styleAttribute = maxSupplyPopover.getAttribute("aria-describedby");
+                    if (styleAttribute != null) {
+                        WebElement descriptionElementP1 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-max-supply-explainer'] div:first-child"));
+                        String textP1 = descriptionElementP1.getText();
+                        MatcherAssert.assertThat(textP1, equalTo("The best approximation of the maximum amount of coins that will exist in the forthcoming lifespan of the cryptocurrency, minus any coins that have been verifiably burned. This is also known as the theoretical max number of coins that can be minted, minus any coins that have been verifiably burned."));
+                        WebElement descriptionElementP2 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-max-supply-explainer'] div:nth-child(3)"));
+                        String textP2 = descriptionElementP2.getText();
+                        MatcherAssert.assertThat(textP2, equalTo("If the project did not submit this data nor was it verified by CoinMarketCap, max. supply shows \"--\"."));
+                        break;
+                    }
+                } catch (org.openqa.selenium.StaleElementReferenceException e) {
+                }
             }
-        } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            WebElement maxSupplyPopover = driver.findElement(coinMaxSupplyPopover);
-            Actions actions = new Actions(driver);
-            actions.moveToElement(maxSupplyPopover).perform();
-            String styleAttribute = maxSupplyPopover.getAttribute("aria-describedby");
-            if (styleAttribute != null) {
-                WebElement descriptionElementP1 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-max-supply-explainer'] div:first-child"));
-                String textP1 = descriptionElementP1.getText();
-                MatcherAssert.assertThat(textP1, equalTo("The best approximation of the maximum amount of coins that will exist in the forthcoming lifespan of the cryptocurrency, minus any coins that have been verifiably burned. This is also known as the theoretical max number of coins that can be minted, minus any coins that have been verifiably burned."));
-                WebElement descriptionElementP2 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-max-supply-explainer'] div:nth-child(3)"));
-                String textP2 = descriptionElementP2.getText();
-                MatcherAssert.assertThat(textP2, equalTo("If the project did not submit this data nor was it verified by CoinMarketCap, max. supply shows \"--\"."));
-            }
+        } catch (Exception e) {
+            System.err.println("Произошла ошибка, не связанная с StaleElement: " + e.getMessage());
         }
+        throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
     }
 
     @Step
@@ -556,8 +539,9 @@ public class CoinStatsScroll {
                     WebElement circulatingSupplyPopover = driver.findElement(coinCirculatingSupplyPopover);
                     Actions actions = new Actions(driver);
                     actions.moveToElement(circulatingSupplyPopover).perform();
+                    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                    wait.until(ExpectedConditions.attributeToBeNotEmpty(circulatingSupplyPopover, "aria-describedby"));
                     String styleAttribute = circulatingSupplyPopover.getAttribute("aria-describedby");
-
                     if (styleAttribute != null) {
                         WebElement descriptionElementP1 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-test='tooltip-circulating-supply-explainer'] div"));
                         String textP1 = descriptionElementP1.getText();
@@ -573,6 +557,7 @@ public class CoinStatsScroll {
         } catch (Exception e) {
             System.err.println("Произошла ошибка, не связанная с StaleElement: " + e.getMessage());
         }
+        throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
     }
 
     @Step
@@ -591,6 +576,8 @@ public class CoinStatsScroll {
                     WebElement circulatingSupplyVerIconPopover = driver.findElement(coinCirculatingSupplyVerIconPopover);
                     Actions actions = new Actions(driver);
                     actions.moveToElement(circulatingSupplyVerIconPopover).perform();
+                    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                    wait.until(ExpectedConditions.attributeToBeNotEmpty(circulatingSupplyVerIconPopover, "aria-describedby"));
                     String styleAttribute = circulatingSupplyVerIconPopover.getAttribute("aria-describedby");
 
                     if (styleAttribute != null) {
@@ -608,6 +595,7 @@ public class CoinStatsScroll {
         } catch (Exception e) {
             System.err.println("Произошла ошибка, не связанная с StaleElement: " + e.getMessage());
         }
+        throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
     }
 
     @Step
@@ -626,8 +614,9 @@ public class CoinStatsScroll {
                     WebElement profileScorePopover = driver.findElement(coinProfileScorePopover);
                     Actions actions = new Actions(driver);
                     actions.moveToElement(profileScorePopover).perform();
+                    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                    wait.until(ExpectedConditions.attributeToBeNotEmpty(profileScorePopover, "aria-describedby"));
                     String styleAttribute = profileScorePopover.getAttribute("aria-describedby");
-
                     if (styleAttribute != null) {
                         WebElement descriptionElementP1 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"'] div[data-role='pp-modal-block'] div[data-role='pp-item']"));
                         String textP1 = descriptionElementP1.getText();
@@ -643,6 +632,7 @@ public class CoinStatsScroll {
         } catch (Exception e) {
             System.err.println("Произошла ошибка, не связанная с StaleElement: " + e.getMessage());
         }
+        throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
     }
 
     @Step
@@ -704,7 +694,7 @@ public class CoinStatsScroll {
                     actions.moveToElement(converter).perform();
                     actions.moveToElement(ucidPopover).perform();
                     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-                    WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(coinUcidPopover));
+                    wait.until(ExpectedConditions.attributeToBeNotEmpty(ucidPopover, "aria-describedby"));
                     String styleAttribute = ucidPopover.getAttribute("aria-describedby");
                     System.out.println("styleAttribute: "+styleAttribute);
 
@@ -728,6 +718,7 @@ public class CoinStatsScroll {
         } catch (Exception e) {
             System.err.println("Произошла ошибка, не связанная с StaleElement: " + e.getMessage());
         }
+        throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
     }
 
     @Step
@@ -743,6 +734,7 @@ public class CoinStatsScroll {
                 break;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
+        throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
     }
 
     @Step
@@ -758,6 +750,7 @@ public class CoinStatsScroll {
                 break;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
+        throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
     }
 
     @Step
@@ -773,6 +766,7 @@ public class CoinStatsScroll {
                 break;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
+        throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
     }
 
     @Step
@@ -788,6 +782,7 @@ public class CoinStatsScroll {
                 break;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
+        throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
     }
 
     @Step
@@ -805,6 +800,7 @@ public class CoinStatsScroll {
         }
         String text = driver.findElement(pageCryptoMarketCycleIndicatorsTitle).getText();
         MatcherAssert.assertThat(text, containsString("Crypto Market Cycle Indicators"));
+        throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
     }
 
     @Step
@@ -820,6 +816,7 @@ public class CoinStatsScroll {
                 break;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
+        throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
     }
 
 
