@@ -16,18 +16,9 @@ public class OpenMeinPage extends DriverRule{
     @DisplayName("Success open Cryptocurrencies")
     public void successOpenCryptocurrencies(){
         Header header = new Header(driver);
-        try {header.clickDexScanButton();}
-        catch (org.openqa.selenium.StaleElementReferenceException e) {
-            header.clickDexScanButton();
-        }
-        try {header.dexClickCryptocurrenciesButton();}
-        catch (org.openqa.selenium.StaleElementReferenceException e) {
-            header.dexClickCryptocurrenciesButton();
-        }
-        try {header.checkH1MainTitleText();}
-        catch (org.openqa.selenium.StaleElementReferenceException e) {
-            header.checkH1MainTitleText();
-        }
+        header.clickDexScanButton();
+        header.dexClickCryptocurrenciesButton();
+        header.checkH1MainTitleText();
     }
 
 }

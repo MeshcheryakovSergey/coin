@@ -2,12 +2,8 @@ import io.qameta.allure.junit4.DisplayName;
 import org.junit.Before;
 import org.junit.Test;
 import page.main.Header;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import page.main.MainPage;
 
-import java.time.Duration;
 
 public class MainHeader extends DriverRule{
 
@@ -28,18 +24,9 @@ public class MainHeader extends DriverRule{
     @DisplayName("Success open Cryptocurrencies")
     public void successOpenCryptocurrencies(){
         Header header = new Header(driver);
-        try {header.clickDexScanButton();}
-        catch (org.openqa.selenium.StaleElementReferenceException e) {
-            header.clickDexScanButton();
-        }
-        try {header.dexClickCryptocurrenciesButton();}
-        catch (org.openqa.selenium.StaleElementReferenceException e) {
-            header.dexClickCryptocurrenciesButton();
-        }
-        try {header.checkH1MainTitleText();}
-        catch (org.openqa.selenium.StaleElementReferenceException e) {
-            header.checkH1MainTitleText();
-        }
+        header.clickDexScanButton();
+        header.dexClickCryptocurrenciesButton();
+        header.checkH1MainTitleText();
     }
 
     @Test
@@ -49,15 +36,11 @@ public class MainHeader extends DriverRule{
         header.checkDexScanButtonText();
     }
 
-
     @Test
     @DisplayName("Success open DexScan")
     public void successOpenDexScan(){
         Header header = new Header(driver);
-        try {header.clickDexScanButton();}
-        catch (org.openqa.selenium.StaleElementReferenceException e) {
-            header.clickDexScanButton();
-        }
+        header.clickDexScanButton();
     }
 
     @Test
@@ -71,10 +54,7 @@ public class MainHeader extends DriverRule{
     @DisplayName("Success open Exchanges")
     public void successOpenExchanges(){
         Header header = new Header(driver);
-        try {header.clickExchangesButton();}
-        catch (org.openqa.selenium.StaleElementReferenceException e) {
-            header.clickExchangesButton();
-        }
+        header.clickExchangesButton();
     }
 
     @Test
@@ -88,10 +68,7 @@ public class MainHeader extends DriverRule{
     @DisplayName("Success open Community")
     public void successOpenCommunity(){
         Header header = new Header(driver);
-        try {header.clickCommunityButton();}
-        catch (org.openqa.selenium.StaleElementReferenceException e) {
-            header.clickCommunityButton();
-        }
+        header.clickCommunityButton();
     }
 
     @Test
@@ -156,8 +133,6 @@ public class MainHeader extends DriverRule{
     public void successOpenAppQrCode(){
         Header header = new Header(driver);
         header.clickAppQrCode();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement modalWindow = wait.until(ExpectedConditions.visibilityOfElementLocated(header.getAppQrCodeText()));
         header.checkAppQrCodeText();
     }
 

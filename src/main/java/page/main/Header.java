@@ -7,8 +7,11 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import util.ApiSpecBuilder;
 
+import java.time.Duration;
 import java.util.List;
 
 import static org.hamcrest.Matchers.equalTo;
@@ -45,7 +48,6 @@ public class Header {
 
 
     public final static By appQrCode = By.cssSelector("div[class*='AppQRCodeBtn_app-download']");
-    public By getAppQrCodeText() {return appQrCodeText;}
     public final static By appQrCodeText = By.cssSelector("span[class*='AppQRCodeBtn_app-download__dropdown_text1']");
     public final static By logInButton = By.cssSelector("button[data-btnname='Log In']");
     public final static By forgotPasswordText = By.cssSelector("span[class='label-pwd']");
@@ -76,8 +78,14 @@ public class Header {
 
     @Step
     public void checkH1MainTitleText() {
-        String text = driver.findElement(h1MainTitle).getText();
-        MatcherAssert.assertThat(text, equalTo("Today's Cryptocurrency Prices by Market Cap"));
+        for (int i = 0; i < 3; i++) {
+            try {
+                String text = driver.findElement(h1MainTitle).getText();
+                MatcherAssert.assertThat(text, equalTo("Today's Cryptocurrency Prices by Market Cap"));
+                break;
+            } catch (org.openqa.selenium.StaleElementReferenceException e) {}
+        }
+        throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
     }
 
     @Step
@@ -130,7 +138,9 @@ public class Header {
 
     @Step
     public void checkAppQrCodeText() {
-        String text = driver.findElement(appQrCodeText).getText();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(appQrCodeText));
+        String text = element.getText();
         MatcherAssert.assertThat(text, equalTo("Scan to Download CoinMarketCap App"));
     }
 
@@ -147,22 +157,46 @@ public class Header {
 
     @Step
     public void dexClickCryptocurrenciesButton() {
-        driver.findElement(dexCryptocurrenciesButtonText).click();
+        for (int i = 0; i < 3; i++) {
+            try {
+                driver.findElement(dexCryptocurrenciesButtonText).click();
+                break;
+            } catch (org.openqa.selenium.StaleElementReferenceException e) {}
+        }
+        throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
     }
 
     @Step
     public void clickDexScanButton() {
-        driver.findElement(dexScanButtonText).click();
+        for (int i = 0; i < 3; i++) {
+            try {
+                driver.findElement(dexScanButtonText).click();
+                break;
+            } catch (org.openqa.selenium.StaleElementReferenceException e) {}
+        }
+        throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
     }
 
     @Step
     public void clickExchangesButton() {
-        driver.findElement(exchangesButtonText).click();
+        for (int i = 0; i < 3; i++) {
+            try {
+                driver.findElement(exchangesButtonText).click();
+                break;
+            } catch (org.openqa.selenium.StaleElementReferenceException e) {}
+        }
+        throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
     }
 
     @Step
     public void clickCommunityButton() {
-        driver.findElement(communityButtonText).click();
+        for (int i = 0; i < 3; i++) {
+            try {
+                driver.findElement(communityButtonText).click();
+                break;
+            } catch (org.openqa.selenium.StaleElementReferenceException e) {}
+        }
+        throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
     }
 
     @Step

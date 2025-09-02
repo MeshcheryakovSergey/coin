@@ -41,19 +41,10 @@ public class MainHeaderLeftPart extends DriverRule{
     public void successFollowRankingLink(){
         HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
         Header header = new Header(driver);
-        try {header.clickDexScanButton();}
-        catch (org.openqa.selenium.StaleElementReferenceException e) {
-            header.clickDexScanButton();
-        }
+        header.clickDexScanButton();
         leftMenu.hoverCryptocurrenciesButton();
-        try {leftMenu.clickRankingLink();}
-        catch (org.openqa.selenium.StaleElementReferenceException e) {
-            leftMenu.clickRankingLink();
-        }
-        try {header.checkH1MainTitleText();}
-        catch (org.openqa.selenium.StaleElementReferenceException e) {
-            header.checkH1MainTitleText();
-        }
+        leftMenu.clickRankingLink();
+        header.checkH1MainTitleText();
     }
 
     @Test
@@ -69,14 +60,8 @@ public class MainHeaderLeftPart extends DriverRule{
     public void successOpenCryptocurrencies(){
         HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
         leftMenu.hoverCryptocurrenciesButton();
-        try {leftMenu.clickCategoriesLink();}
-        catch (org.openqa.selenium.StaleElementReferenceException e) {
-            leftMenu.clickCategoriesLink();
-        }
-        try {leftMenu.checkH1CryptocurrencyCategoryText();}
-        catch (org.openqa.selenium.StaleElementReferenceException e) {
-            leftMenu.checkH1CryptocurrencyCategoryText();
-        }
+        leftMenu.clickCategoriesLink();
+        leftMenu.checkH1CryptocurrencyCategoryText();
     }
 
     @Test
@@ -92,14 +77,8 @@ public class MainHeaderLeftPart extends DriverRule{
     public void successOpenHistoricalSnapshots(){
         HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
         leftMenu.hoverCryptocurrenciesButton();
-        try {leftMenu.clickHistoricalSnapshotsLink();}
-        catch (org.openqa.selenium.StaleElementReferenceException e) {
-            leftMenu.clickHistoricalSnapshotsLink();
-        }
-        try {leftMenu.checkH1CryptocurrencyHistoricalSnapshotsText();}
-        catch (org.openqa.selenium.StaleElementReferenceException e) {
-            leftMenu.checkH1CryptocurrencyHistoricalSnapshotsText();
-        }
+        leftMenu.clickHistoricalSnapshotsLink();
+        leftMenu.checkH1CryptocurrencyHistoricalSnapshotsText();
     }
 
     @Test
@@ -115,14 +94,8 @@ public class MainHeaderLeftPart extends DriverRule{
     public void successOpenTokenUnlocks(){
         HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
         leftMenu.hoverCryptocurrenciesButton();
-        try {leftMenu.clickTokenUnlocksLink();}
-        catch (org.openqa.selenium.StaleElementReferenceException e) {
-            leftMenu.clickTokenUnlocksLink();
-        }
-        try {leftMenu.checkH1CryptocurrencyTokenUnlocksText();}
-        catch (org.openqa.selenium.StaleElementReferenceException e) {
-            leftMenu.checkH1CryptocurrencyTokenUnlocksText();
-        }
+        leftMenu.clickTokenUnlocksLink();
+        leftMenu.checkH1CryptocurrencyTokenUnlocksText();
     }
 
     @Test
@@ -138,14 +111,8 @@ public class MainHeaderLeftPart extends DriverRule{
     public void successOpenYield(){
         HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
         leftMenu.hoverCryptocurrenciesButton();
-        try {leftMenu.clickYieldLink();}
-        catch (org.openqa.selenium.StaleElementReferenceException e) {
-            leftMenu.clickYieldLink();
-        }
-        try {leftMenu.checkH1CryptocurrencyYieldText();}
-        catch (org.openqa.selenium.StaleElementReferenceException e) {
-            leftMenu.checkH1CryptocurrencyYieldText();
-        }
+        leftMenu.clickYieldLink();
+        leftMenu.checkH1CryptocurrencyYieldText();
     }
 
 
@@ -179,16 +146,8 @@ public class MainHeaderLeftPart extends DriverRule{
     public void successOpenTrending() {
         HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
         leftMenu.hoverCryptocurrenciesButton();
-        try {
-            leftMenu.clickTrendingLink();
-        } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            leftMenu.clickTrendingLink();
-        }
-        try {
-            leftMenu.checkH1LeaderboardsTrendingText();
-        } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            leftMenu.checkH1LeaderboardsTrendingText();
-        }
+        leftMenu.clickTrendingLink();
+        leftMenu.checkH1LeaderboardsTrendingText();
     }
 
     @Test
@@ -204,16 +163,8 @@ public class MainHeaderLeftPart extends DriverRule{
     public void successOpenUpcoming() {
         HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
         leftMenu.hoverCryptocurrenciesButton();
-        try {
-            leftMenu.clickUpcomingLink();
-        } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            leftMenu.clickUpcomingLink();
-        }
-        try {
-            leftMenu.checkH1LeaderboardsUpcomingText();
-        } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            leftMenu.checkH1LeaderboardsUpcomingText();
-        }
+        leftMenu.clickUpcomingLink();
+        leftMenu.checkH1LeaderboardsUpcomingText();
     }
 
     @Test
@@ -229,16 +180,8 @@ public class MainHeaderLeftPart extends DriverRule{
     public void successOpenRecentlyAdded() {
         HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
         leftMenu.hoverCryptocurrenciesButton();
-        try {
-            leftMenu.clickRecentlyAddedLink();
-        } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            leftMenu.clickRecentlyAddedLink();
-        }
-        try {
-            leftMenu.checkH1LeaderboardsRecentlyAddedText();
-        } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            leftMenu.checkH1LeaderboardsRecentlyAddedText();
-        }
+        leftMenu.clickRecentlyAddedLink();
+        leftMenu.checkH1LeaderboardsRecentlyAddedText();
     }
 
     @Test
@@ -254,16 +197,8 @@ public class MainHeaderLeftPart extends DriverRule{
     public void successOpenGainersLosers() {
         HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
         leftMenu.hoverCryptocurrenciesButton();
-        try {
-            leftMenu.clickGainersLosersLink();
-        } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            leftMenu.clickGainersLosersLink();
-        }
-        try {
-            leftMenu.checkH1LeaderboardsGainersLosersText();
-        } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            leftMenu.checkH1LeaderboardsGainersLosersText();
-        }
+        leftMenu.clickGainersLosersLink();
+        leftMenu.checkH1LeaderboardsGainersLosersText();
     }
 
     @Test
@@ -279,16 +214,8 @@ public class MainHeaderLeftPart extends DriverRule{
     public void successOpenMostVisited() {
         HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
         leftMenu.hoverCryptocurrenciesButton();
-        try {
-            leftMenu.clickMostVisitedLink();
-        } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            leftMenu.clickMostVisitedLink();
-        }
-        try {
-            leftMenu.checkH1LeaderboardsMostVisitedText();
-        } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            leftMenu.checkH1LeaderboardsMostVisitedText();
-        }
+        leftMenu.clickMostVisitedLink();
+        leftMenu.checkH1LeaderboardsMostVisitedText();
     }
 
     @Test
@@ -304,16 +231,8 @@ public class MainHeaderLeftPart extends DriverRule{
     public void successOpenCommunitySentiment() {
         HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
         leftMenu.hoverCryptocurrenciesButton();
-        try {
-            leftMenu.clickCommunitySentimentLink();
-        } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            leftMenu.clickCommunitySentimentLink();
-        }
-        try {
-            leftMenu.checkH1LeaderboardsCommunitySentimentText();
-        } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            leftMenu.checkH1LeaderboardsCommunitySentimentText();
-        }
+        leftMenu.clickCommunitySentimentLink();
+        leftMenu.checkH1LeaderboardsCommunitySentimentText();
     }
 
     @Test
@@ -329,16 +248,8 @@ public class MainHeaderLeftPart extends DriverRule{
     public void successOpenChainRanking() {
         HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
         leftMenu.hoverCryptocurrenciesButton();
-        try {
-            leftMenu.clickChainRankingLink();
-        } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            leftMenu.clickChainRankingLink();
-        }
-        try {
-            leftMenu.checkH1LeaderboardsChainRankingText();
-        } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            leftMenu.checkH1LeaderboardsChainRankingText();
-        }
+        leftMenu.clickChainRankingLink();
+        leftMenu.checkH1LeaderboardsChainRankingText();
     }
 
 
@@ -372,16 +283,8 @@ public class MainHeaderLeftPart extends DriverRule{
     public void successOpenMarketOverview () {
         HeaderLeftMenu leftMenu = new HeaderLeftMenu(driver);
         leftMenu.hoverCryptocurrenciesButton();
-        try {
-            leftMenu.clickMarketOverviewLink();
-        } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            leftMenu.clickMarketOverviewLink();
-        }
-        try {
-            leftMenu.checkH1MarketOverviewMarketOverviewText();
-        } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            leftMenu.checkH1MarketOverviewMarketOverviewText();
-        }
+        leftMenu.clickMarketOverviewLink();
+        leftMenu.checkH1MarketOverviewMarketOverviewText();
     }
 
 

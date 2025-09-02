@@ -168,7 +168,7 @@ public class CoinStatsScroll {
     }
 
     @Step
-    public void checkWatchlistToolTipTextP1(){
+    public void checkWatchlistToolTipText(){
         try {
             for (int i = 0; i < 3; i++) {
                 try {
@@ -179,9 +179,13 @@ public class CoinStatsScroll {
                     wait.until(ExpectedConditions.attributeToBeNotEmpty(watchlistText, "aria-describedby"));
                     String styleAttribute = watchlistText.getAttribute("aria-describedby");
                     if (styleAttribute != null) {
-                        WebElement descriptionElement = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"']>div>div>div>div span:first-child "));
-                        String text = descriptionElement.getText();
-                        MatcherAssert.assertThat(text, equalTo("Add Bitcoin to your watchlist."));
+                        WebElement descriptionElementP1 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"']>div>div>div>div span:first-child "));
+                        String textP1 = descriptionElementP1.getText();
+                        MatcherAssert.assertThat(textP1, equalTo("Add Bitcoin to your watchlist."));
+                        WebElement descriptionElementP2 = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"']>div>div>div>div span:nth-child(2)"));
+                        String textP2 = descriptionElementP2.getText();
+                        String regexPattern = "^\\dM watchlists on CoinMarketCap include Bitcoin\\.$";
+                        MatcherAssert.assertThat(textP2, matchesPattern(regexPattern));
                         break;
                     }
                 } catch (org.openqa.selenium.StaleElementReferenceException e) {
@@ -190,33 +194,6 @@ public class CoinStatsScroll {
         } catch (Exception e) {
             System.err.println("Произошла ошибка, не связанная с StaleElement: " + e.getMessage());
         }
-        throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
-    }
-
-    @Step
-    public void checkWatchlistToolTipTextP2(){
-        try {
-            for (int i = 0; i < 3; i++) {
-                try {
-                    WebElement watchlistText = driver.findElement(coinWatchlistPlace);
-                    Actions actions = new Actions(driver);
-                    actions.moveToElement(watchlistText).perform();
-                    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-                    wait.until(ExpectedConditions.attributeToBeNotEmpty(watchlistText, "aria-describedby"));
-                    String styleAttribute = watchlistText.getAttribute("aria-describedby");
-                    if (styleAttribute != null) {
-                        WebElement descriptionElement = driver.findElement(By.cssSelector("div[id*='"+styleAttribute+"']>div>div>div>div span:nth-child(2)"));
-                        String text = descriptionElement.getText();
-                        String regexPattern = "^\\dM watchlists on CoinMarketCap include Bitcoin\\.$";
-                        MatcherAssert.assertThat(text, matchesPattern(regexPattern));
-                        break;
-                    }
-                } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            }
-        }
-    } catch (Exception e) {
-        System.err.println("Произошла ошибка, не связанная с StaleElement: " + e.getMessage());
-    }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
     }
 
@@ -230,11 +207,15 @@ public class CoinStatsScroll {
 
     @Step
     public void clickCoinShareButton() {
-        try {driver.findElement(coinShareButton).click();
-        } catch (org.openqa.selenium.StaleElementReferenceException e) {
-            driver.findElement(coinShareButton).click();
+        for (int i = 0; i < 3; i++) {
+            try {
+                driver.findElement(coinShareButton).click();
+                break;
+            } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
+        throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
     }
+
 
     @Step
     public void checkShareImg() {
@@ -375,7 +356,9 @@ public class CoinStatsScroll {
 
     @Step
     public void checkGroupItemFDVText() {
-        String text = driver.findElement(coinFDV).getText();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(coinFDV));
+        String text = element.getText();
         MatcherAssert.assertThat(text, equalTo("FDV"));
     }
 
@@ -451,8 +434,8 @@ public class CoinStatsScroll {
     public void checkGroupItemTotalSupplyText() {
         //не получается найти элемент на странице, пришлось использовать ожидание
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(coinTotalSupply));
-        String text = driver.findElement(coinTotalSupply).getText();
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(coinTotalSupply));
+        String text = element.getText();
         MatcherAssert.assertThat(text, equalTo("Total supply"));
     }
 

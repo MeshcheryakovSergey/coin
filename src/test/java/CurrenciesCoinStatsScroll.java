@@ -77,21 +77,12 @@ public class CurrenciesCoinStatsScroll extends DriverRule{
     }
 
     @Test
-    @DisplayName("Check text on Coin watchlist tooltip part 1")
+    @DisplayName("Check text on Coin watchlist tooltip")
     public void checkTextOnCoinWatchlistToolTipPart1(){
         MainPage mainPage = new MainPage(driver);
         mainPage.clickFirstCoin();
         CoinStatsScroll coinStats = new CoinStatsScroll(driver);
-        coinStats.checkWatchlistToolTipTextP1();
-    }
-
-    @Test
-    @DisplayName("Check text on Coin watchlist tooltip part 2")
-    public void checkTextOnCoinWatchlistToolTipPart2(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.clickFirstCoin();
-        CoinStatsScroll coinStats = new CoinStatsScroll(driver);
-        coinStats.checkWatchlistToolTipTextP2();
+        coinStats.checkWatchlistToolTipText();
     }
 
     @Test
