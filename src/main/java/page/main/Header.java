@@ -19,6 +19,7 @@ import static org.hamcrest.Matchers.equalTo;
 public class Header {
 
     public final static By h1MainTitle = By.cssSelector("h1[class*='SummaryHeader_main-title']>span");
+    public final static By h1MainTitleHelp = By.cssSelector("div[class='sc-65e7f566-0 ibxKcZ block-newsletter']");
 
 
     public final static By h1CryptocurrencyCategory = By.cssSelector("h1[class*='SummaryHeader_main-title']>span");
@@ -27,13 +28,13 @@ public class Header {
     public final static By h1CryptocurrencyYield = By.cssSelector("h1[class*='SummaryHeader_main-title']>span");
 
     public final static By cryptocurrenciesButton = By.cssSelector("section[data-hydration-on-demand]>div[data-role]:first-child");
-    public final static By dexScanButton = By.cssSelector("section[data-hydration-on-demand]>div[data-role]:nth-child(2)");
+    public final static By dexScanButton = By.cssSelector("section[data-hydration-on-demand]>div[data-role]:nth-child(2) a>div");
     public final static By exchangesButton = By.cssSelector("section[data-hydration-on-demand]>div[data-role]:nth-child(3)");
     public final static By communityButton = By.cssSelector("section[data-hydration-on-demand]>div[data-role]:nth-child(4)");
     public final static By productsButton = By.cssSelector("section[data-hydration-on-demand]>div[data-role]:nth-child(5)");
 
     public final static By mainCryptocurrenciesButtonText = By.cssSelector("a[href='/']>div");
-    public final static By dexScanButtonText = By.cssSelector("div[data-role]>a[href='https://dex.coinmarketcap.com/token/all/']>div");
+    public final static By dexScanButtonText = By.cssSelector("div[data-role] section[data-hydration-on-demand='true']>div:nth-child(2) a>div");
     public final static By exchangesButtonText = By.cssSelector("div[data-role]>a[href='/rankings/exchanges/']>div");
     public final static By communityButtonText = By.cssSelector("div[data-role]>a[href='/community/']>div");
     public final static By productsButtonText = By.cssSelector("section>:nth-child(5)");
@@ -55,7 +56,7 @@ public class Header {
     public final static By userMenu = By.cssSelector("div[class*='UserDropdown_user-section-wrapper']>div[class*='BasePopover_base']");
     public final static By lightButtonInUserMenu = By.cssSelector("li[data-index='tab-light']");
 
-    public final static By dexCryptocurrenciesButtonText = By.cssSelector("a[href='https://coinmarketcap.com/']>div");
+    public final static By dexCryptocurrenciesButtonText = By.cssSelector("div[data-role='menu-item']:first-child div");
 
 
 
@@ -80,9 +81,14 @@ public class Header {
     public void checkH1MainTitleText() {
         for (int i = 0; i < 3; i++) {
             try {
-                String text = driver.findElement(h1MainTitle).getText();
+                WebElement helper = driver.findElement(h1MainTitleHelp);
+                Actions actions = new Actions(driver);
+                actions.moveToElement(helper).perform();
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(h1MainTitle));
+                String text = element.getText();
                 MatcherAssert.assertThat(text, equalTo("Today's Cryptocurrency Prices by Market Cap"));
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -159,20 +165,26 @@ public class Header {
     public void dexClickCryptocurrenciesButton() {
         for (int i = 0; i < 3; i++) {
             try {
-                driver.findElement(dexCryptocurrenciesButtonText).click();
-                break;
-            } catch (org.openqa.selenium.StaleElementReferenceException e) {}
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                wait.until(ExpectedConditions.visibilityOfElementLocated(dexCryptocurrenciesButtonText)).click();
+                return;
+            } catch (org.openqa.selenium.StaleElementReferenceException e) {
+                System.err.println("StaleElementReferenceException.");
+            }
         }
-        throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
+        throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.333");
     }
 
     @Step
     public void clickDexScanButton() {
         for (int i = 0; i < 3; i++) {
             try {
-                driver.findElement(dexScanButtonText).click();
-                break;
-            } catch (org.openqa.selenium.StaleElementReferenceException e) {}
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                wait.until(ExpectedConditions.visibilityOfElementLocated(dexScanButton)).click();
+                return;
+            } catch (org.openqa.selenium.StaleElementReferenceException e) {
+                System.err.println("StaleElementReferenceException.");
+            }
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
     }
@@ -182,7 +194,7 @@ public class Header {
         for (int i = 0; i < 3; i++) {
             try {
                 driver.findElement(exchangesButtonText).click();
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -193,14 +205,22 @@ public class Header {
         for (int i = 0; i < 3; i++) {
             try {
                 driver.findElement(communityButtonText).click();
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
     }
 
     @Step
-    public void clickProductsButton() {driver.findElement(productsButtonText).click();}
+    public void clickProductsButton() {
+        for (int i = 0; i < 3; i++) {
+            try {
+                driver.findElement(productsButtonText).click();
+                return;
+            } catch (org.openqa.selenium.StaleElementReferenceException e) {}
+        }
+        throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
+    }
 
     @Step
     public void clickPortfolioButton() {
@@ -242,7 +262,7 @@ public class Header {
         //findElements - с s на конце так как элементов больше 1
         List<WebElement> menuButtonElement = (List<WebElement>) driver.findElements(menuButtonSize);
         int menuSize = menuButtonElement.size();
-        MatcherAssert.assertThat(menuSize, equalTo(5));
+        MatcherAssert.assertThat(menuSize, equalTo(6));
     }
 
     @Step
