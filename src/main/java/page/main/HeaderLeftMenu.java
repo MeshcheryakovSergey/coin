@@ -80,7 +80,7 @@ public class HeaderLeftMenu {
             try {
                 String text = driver.findElement(Header.h1CryptocurrencyCategory).getText();
                 MatcherAssert.assertThat(text, equalTo("Cryptocurrency Sectors by 24h Price Change"));
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -92,7 +92,7 @@ public class HeaderLeftMenu {
             try {
                 String text = driver.findElement(Header.h1CryptocurrencyHistoricalSnapshots).getText();
                 MatcherAssert.assertThat(text, equalTo("Cryptocurrency Historical Data Snapshot"));
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -104,7 +104,7 @@ public class HeaderLeftMenu {
             try {
                 String text = driver.findElement(Header.h1CryptocurrencyTokenUnlocks).getText();
                 MatcherAssert.assertThat(text, equalTo("Token Unlock And Vesting Schedules"));
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -116,7 +116,7 @@ public class HeaderLeftMenu {
             try {
                 String text = driver.findElement(Header.h1CryptocurrencyYield).getText();
                 MatcherAssert.assertThat(text, equalTo("Explore Yield Products"));
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -128,7 +128,7 @@ public class HeaderLeftMenu {
             try {
                 String text = driver.findElement(h1LeaderboardsTrending).getText();
                 MatcherAssert.assertThat(text, equalTo("What Are The Trending Cryptocurrencies On CoinMarketCap?"));
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -140,7 +140,7 @@ public class HeaderLeftMenu {
             try {
                 String text = driver.findElement(h1LeaderboardsUpcoming).getText();
                 MatcherAssert.assertThat(text, equalTo("Best Upcoming Cryptocurrencies"));
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -152,7 +152,7 @@ public class HeaderLeftMenu {
             try {
                 String text = driver.findElement(h1LeaderboardsRecentlyAdded).getText();
                 MatcherAssert.assertThat(text, equalTo("New Cryptocurrencies"));
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -164,7 +164,7 @@ public class HeaderLeftMenu {
             try {
                 String text = driver.findElement(h1LeaderboardsGainersLosers).getText();
                 MatcherAssert.assertThat(text, equalTo("Top Crypto Gainers And Losers Today"));
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -176,7 +176,7 @@ public class HeaderLeftMenu {
             try {
                 String text = driver.findElement(h1LeaderboardsMostVisited).getText();
                 MatcherAssert.assertThat(text, equalTo("What Are The Most Viewed Cryptocurrencies on CoinMarketCap?"));
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -188,7 +188,7 @@ public class HeaderLeftMenu {
             try {
                 String text = driver.findElement(h1LeaderboardsCommunitySentiment).getText();
                 MatcherAssert.assertThat(text, equalTo("Crypto Community Sentiment"));
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -200,7 +200,7 @@ public class HeaderLeftMenu {
             try {
                 String text = driver.findElement(h1LeaderboardsChainRanking).getText();
                 MatcherAssert.assertThat(text, equalTo("Largest Blockchains in Crypto Ranked by TVL"));
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -212,7 +212,7 @@ public class HeaderLeftMenu {
             try {
                 String text = driver.findElement(h1MarketOverviewMarketOverview).getText();
                 MatcherAssert.assertThat(text, equalTo("Crypto Market Overview"));
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -269,7 +269,7 @@ public class HeaderLeftMenu {
                 WebElement menuButton = driver.findElement(Header.cryptocurrenciesButton);
                 Actions actions = new Actions(driver);
                 actions.moveToElement(menuButton).perform();
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -279,7 +279,7 @@ public class HeaderLeftMenu {
     public void checkCryptocurrenciesMenuListSize() {
         List<WebElement> cryptocurrenciesMenuList = (List<WebElement>) driver.findElements(cryptocurrenciesSectionMenuListSize);
         int listSize = cryptocurrenciesMenuList.size();
-        MatcherAssert.assertThat(listSize, equalTo(5));
+        MatcherAssert.assertThat(listSize, equalTo(6));
     }
 
     @Step
@@ -293,7 +293,7 @@ public class HeaderLeftMenu {
         for (int i = 0; i < 3; i++) {
             try {
                 driver.findElement(cryptocurrenciesRanking).click();
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -310,7 +310,7 @@ public class HeaderLeftMenu {
         for (int i = 0; i < 3; i++) {
             try {
                 driver.findElement(cryptocurrenciesCategories).click();
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -327,7 +327,7 @@ public class HeaderLeftMenu {
         for (int i = 0; i < 3; i++) {
             try {
                 driver.findElement(cryptocurrenciesHistoricalSnapshots).click();
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -344,7 +344,7 @@ public class HeaderLeftMenu {
         for (int i = 0; i < 3; i++) {
             try {
                 driver.findElement(cryptocurrenciesTokenUnlocks).click();
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -358,11 +358,10 @@ public class HeaderLeftMenu {
 
     @Step
     public void clickYieldLink() {
-        driver.findElement(cryptocurrenciesYield).click();
         for (int i = 0; i < 3; i++) {
             try {
-                driver.findElement(cryptocurrenciesRanking).click();
-                break;
+                driver.findElement(cryptocurrenciesYield).click();
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -422,7 +421,7 @@ public class HeaderLeftMenu {
         for (int i = 0; i < 3; i++) {
             try {
                 driver.findElement(leaderboardsTrending).click();
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -433,7 +432,7 @@ public class HeaderLeftMenu {
         for (int i = 0; i < 3; i++) {
             try {
                 driver.findElement(leaderboardsUpcoming).click();
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -444,7 +443,7 @@ public class HeaderLeftMenu {
         for (int i = 0; i < 3; i++) {
             try {
                 driver.findElement(leaderboardsRecentlyAdded).click();
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -455,7 +454,7 @@ public class HeaderLeftMenu {
         for (int i = 0; i < 3; i++) {
             try {
                 driver.findElement(leaderboardsGainersLosers).click();
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -466,7 +465,7 @@ public class HeaderLeftMenu {
         for (int i = 0; i < 3; i++) {
             try {
                 driver.findElement(leaderboardsMostVisited).click();
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -477,7 +476,7 @@ public class HeaderLeftMenu {
         for (int i = 0; i < 3; i++) {
             try {
                 driver.findElement(leaderboardsCommunitySentiment).click();
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -488,7 +487,7 @@ public class HeaderLeftMenu {
         for (int i = 0; i < 3; i++) {
             try {
                 driver.findElement(leaderboardsChainRanking).click();
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -505,7 +504,7 @@ public class HeaderLeftMenu {
     public void checkMarketOverviewSectionSize() {
         List<WebElement> cryptocurrenciesMenuList = (List<WebElement>) driver.findElements(marketOverviewMenuListSize);
         int listSize = cryptocurrenciesMenuList.size();
-        MatcherAssert.assertThat(listSize, equalTo(7));
+        MatcherAssert.assertThat(listSize, equalTo(9));
     }
 
     public void checkMarketOverviewMarketOverviewText() {
@@ -543,7 +542,7 @@ public class HeaderLeftMenu {
         for (int i = 0; i < 3; i++) {
             try {
                 driver.findElement(marketOverviewMarketOverview).click();
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -554,7 +553,7 @@ public class HeaderLeftMenu {
         for (int i = 0; i < 3; i++) {
             try {
                 driver.findElement(marketOverviewCoinMarketCap100Index).click();
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -565,7 +564,7 @@ public class HeaderLeftMenu {
         for (int i = 0; i < 3; i++) {
             try {
                 driver.findElement(marketOverviewFearGreedIndex).click();
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -576,7 +575,7 @@ public class HeaderLeftMenu {
         for (int i = 0; i < 3; i++) {
             try {
                 driver.findElement(marketOverviewAltcoinSeasonIndex).click();
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -587,7 +586,7 @@ public class HeaderLeftMenu {
         for (int i = 0; i < 3; i++) {
             try {
                 driver.findElement(marketOverviewBitcoinDominance).click();
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
@@ -598,7 +597,7 @@ public class HeaderLeftMenu {
         for (int i = 0; i < 3; i++) {
             try {
                 driver.findElement(marketOverviewCryptoETFs).click();
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
