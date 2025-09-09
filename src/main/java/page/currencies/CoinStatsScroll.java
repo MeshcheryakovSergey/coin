@@ -210,7 +210,7 @@ public class CoinStatsScroll {
         for (int i = 0; i < 3; i++) {
             try {
                 driver.findElement(coinShareButton).click();
-                break;
+                return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {}
         }
         throw new IllegalStateException("Не удалось выполнить проверку после нескольких попыток.");
