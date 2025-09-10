@@ -25,20 +25,33 @@ public class Categories {
     }
 
     @Test
-    @DisplayName("Take information about all coin categories without authentication(401)")
-    public void GetCategoriesWithoutAuth() {
-        CategoriesStep.getCategories("")
+    @DisplayName("Take information about all coin categories without authentication(400)")
+    public void GetCategoriesWithError() {
+        CategoriesStep.get400("!")
             .then()
             .assertThat()
-            .statusCode(401)
+            .statusCode(400)
             .and()
-            .body("status.error_code", equalTo(1002))
+            .body("status.error_code", equalTo(400))
             .and()
-            .body("status.error_message", equalTo("API key missing."));
+            .body("status.error_message", equalTo("\"limit\" must be a number"));
     }
 
     @Test
-    @DisplayName("Checking the operation of the limit parameter ")
+    @DisplayName("Take information about all coin categories without authentication(401)")
+    public void GetCategoriesWithoutAuth() {
+        CategoriesStep.getCategories("")
+                .then()
+                .assertThat()
+                .statusCode(401)
+                .and()
+                .body("status.error_code", equalTo(1002))
+                .and()
+                .body("status.error_message", equalTo("API key missing."));
+    }
+
+    @Test
+    @DisplayName("Checking the operation of the limit parameter")
     public void checkParamLimit() {
         Response response = CategoriesStep.queryParamLimit(1);
         response.then().log().all();
@@ -47,6 +60,74 @@ public class Categories {
         assertThat(categories.size(), equalTo(1));
     }
 
+    @Test
+    @DisplayName("Checking the operation of the start parameter")
+    public void checkParamStart() {
+        Response response = CategoriesStep.queryParamStart(297);
+        response.then().log().all();
+        response.then().assertThat().statusCode(200);
+        List<Map<String, Object>> categories = response.jsonPath().getList("data");
+        assertThat(categories.size(), equalTo(1));
+    }
 
+    @Test
+    @DisplayName("Checking the operation of the ID parameter")
+    public void checkParamId() {
+        Response response = CategoriesStep.queryParamId("6");
+        response.then().log().all();
+        response.then().assertThat().statusCode(200);
+        List<Map<String, Object>> categories = response.jsonPath().getList("data");
+        assertThat(categories.size(), equalTo(1));
+    }
+
+    @Test
+    @DisplayName("Checking the operation of the many ID parameter")
+    public void checkManyParamId() {
+        Response response = CategoriesStep.queryParamId("5,6");
+        response.then().log().all();
+        response.then().assertThat().statusCode(200);
+        List<Map<String, Object>> categories = response.jsonPath().getList("data");
+        assertThat(categories.size(), equalTo(5));
+    }
+
+    @Test
+    @DisplayName("Checking the operation of the slug parameter")
+    public void checkParamSlug() {
+        Response response = CategoriesStep.queryParamSlug("solana");
+        response.then().log().all();
+        response.then().assertThat().statusCode(200);
+        List<Map<String, Object>> categories = response.jsonPath().getList("data");
+        assertThat(categories.size(), equalTo(12));
+    }
+
+    @Test
+    @DisplayName("Checking the operation of the many slug parameter")
+    public void checkManyParamSlug() {
+        Response response = CategoriesStep.queryParamSlug("solana,tron");
+        response.then().log().all();
+        response.then().assertThat().statusCode(200);
+        List<Map<String, Object>> categories = response.jsonPath().getList("data");
+        assertThat(categories.size(), equalTo(17));
+    }
+
+    @Test
+    @DisplayName("Checking the operation of the symbol parameter")
+    public void checkParamSymbol() {
+        Response response = CategoriesStep.queryParamSymbol("TRX");
+        response.then().log().all();
+        response.then().assertThat().statusCode(200);
+        List<Map<String, Object>> categories = response.jsonPath().getList("data");
+        assertThat(categories.size(), equalTo(8));
+    }
+
+    @Test
+    @DisplayName("Checking the operation of the many symbol parameter")
+    public void checkManyParamSymbol() {
+        Response response = CategoriesStep.queryParamSymbol("SOL,TRX");
+        response.then().log().all();
+        response.then().assertThat().statusCode(200);
+        List<Map<String, Object>> categories = response.jsonPath().getList("data");
+        assertThat(categories.size(), equalTo(16));
+    }
 
 }
