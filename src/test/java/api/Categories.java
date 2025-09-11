@@ -1,7 +1,10 @@
 package api;
 
 import io.qameta.allure.junit4.DisplayName;
+import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import com.github.tomakehurst.wiremock.WireMockServer;
+
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import page.api.CategoriesStep;
@@ -10,10 +13,17 @@ import util.ApiSpecBuilder;
 import java.util.List;
 import java.util.Map;
 
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.everyItem;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+import static util.Api.CATEGORIES_PATH;
+import static util.ApiSpecBuilder.BASE_URL;
 
 public class Categories {
+
+    private WireMockServer wireMockServer;
 
     @Test
     @DisplayName("Successful receipt information about all coin categories(200)")
@@ -25,7 +35,7 @@ public class Categories {
     }
 
     @Test
-    @DisplayName("Take information about all coin categories without authentication(400)")
+    @DisplayName("Query call with error(400)")
     public void GetCategoriesWithError() {
         CategoriesStep.get400("!")
             .then()
@@ -48,6 +58,114 @@ public class Categories {
                 .body("status.error_code", equalTo(1002))
                 .and()
                 .body("status.error_message", equalTo("API key missing."));
+    }
+
+    @Test
+    @DisplayName("Getting error 500")
+    public void GetCategories500ErrorTest() {
+        WireMockServer wireMockServer = new WireMockServer(8080);
+        wireMockServer.start();
+
+        String jsonBody = "{\n" +
+                "  \"status\": {\n" +
+                "    \"timestamp\": \"2018-06-02T22:51:28.209Z\",\n" +
+                "    \"error_code\": 500,\n" +
+                "    \"error_message\": \"An internal server error occurred\",\n" +
+                "    \"elapsed\": 10,\n" +
+                "    \"credit_count\": 0\n" +
+                "  }\n" +
+                "}";
+
+        wireMockServer.stubFor(get(urlEqualTo(CATEGORIES_PATH))
+                .willReturn(aResponse()
+                        .withStatus(500)
+                        .withHeader("Content-Type", "application/json")
+                        .withBody(jsonBody)));
+
+        RestAssured.given()
+                .when()
+                .get("http://localhost:8080"+CATEGORIES_PATH)
+                .then()
+                .assertThat()
+                .statusCode(500)
+                .and()
+                .body("status.error_code", equalTo(500))
+                .and()
+                .body("status.error_message", equalTo("An internal server error occurred"));
+
+        wireMockServer.stop();
+    }
+
+    @Test
+    @DisplayName("Getting error 403")
+    public void GetCategories403ErrorTest() {
+        WireMockServer wireMockServer = new WireMockServer(8080);
+        wireMockServer.start();
+
+        String jsonBody = "{\n" +
+                "  \"status\": {\n" +
+                "    \"timestamp\": \"2018-06-02T22:51:28.209Z\",\n" +
+                "    \"error_code\": 1006,\n" +
+                "    \"error_message\": \"Your API Key subscription plan doesn't support this endpoint.\",\n" +
+                "    \"elapsed\": 10,\n" +
+                "    \"credit_count\": 0\n" +
+                "  }\n" +
+                "}";
+
+        wireMockServer.stubFor(get(urlEqualTo(CATEGORIES_PATH))
+                .willReturn(aResponse()
+                        .withStatus(403)
+                        .withHeader("Content-Type", "application/json")
+                        .withBody(jsonBody)));
+
+        RestAssured.given()
+                .when()
+                .get("http://localhost:8080"+CATEGORIES_PATH)
+                .then()
+                .assertThat()
+                .statusCode(403)
+                .and()
+                .body("status.error_code", equalTo(1006))
+                .and()
+                .body("status.error_message", equalTo("Your API Key subscription plan doesn't support this endpoint."));
+
+        wireMockServer.stop();
+    }
+
+    @Test
+    @DisplayName("Getting error 429")
+    public void GetCategories429ErrorTest() {
+        WireMockServer wireMockServer = new WireMockServer(8080);
+        wireMockServer.start();
+
+        String jsonBody = "{\n" +
+                "  \"status\": {\n" +
+                "    \"timestamp\": \"2018-06-02T22:51:28.209Z\",\n" +
+                "    \"error_code\": 1008,\n" +
+                "    \"error_message\": \"You've exceeded your API Key's HTTP request rate limit. Rate limits reset every minute.\",\n" +
+                "    \"elapsed\": 10,\n" +
+                "    \"credit_count\": 0\n" +
+                "  }\n" +
+                "}";
+
+        wireMockServer.stubFor(get(urlEqualTo(CATEGORIES_PATH))
+                .willReturn(aResponse()
+                        .withStatus(429)
+                        .withHeader("Content-Type", "application/json")
+                        .withBody(jsonBody)));
+
+        RestAssured.given()
+                .when()
+                .get("http://localhost:8080"+CATEGORIES_PATH)
+                .then()
+                .assertThat()
+                .statusCode(429)
+                .and()
+                .body("status.error_code", equalTo(1008))
+                .and()
+                .body("status.error_message", equalTo("You've exceeded your API Key's HTTP request rate limit. Rate limits reset every minute."));
+
+        wireMockServer.stop();
     }
 
     @Test
@@ -128,6 +246,20 @@ public class Categories {
         response.then().assertThat().statusCode(200);
         List<Map<String, Object>> categories = response.jsonPath().getList("data");
         assertThat(categories.size(), equalTo(16));
+    }
+
+    @Test
+    @DisplayName("Checking fields in response")
+    public void checkFields() {
+        Response response = CategoriesStep.queryParamId("6");
+        // Проверяем наличие ключей верхнего уровня
+        response.then()
+                .statusCode(200)
+                .and()
+                .body("$", allOf(hasKey("status"), hasKey("data"))) // Проверяем наличие ключей верхнего уровня
+                .and()
+                .body("status", allOf(hasKey("timestamp"), hasKey("error_code"), hasKey("error_message"), hasKey("elapsed"), hasKey("credit_count"), hasKey("notice")))
+                .body("data", everyItem(allOf(hasKey("id"), hasKey("name"), hasKey("title"), hasKey("description"), hasKey("num_tokens"), hasKey("avg_price_change"), hasKey("market_cap"), hasKey("market_cap_change"), hasKey("volume"), hasKey("volume_change"), hasKey("last_updated"))));
     }
 
 }
