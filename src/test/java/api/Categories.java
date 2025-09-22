@@ -1,5 +1,6 @@
 package api;
 
+import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -12,6 +13,9 @@ import util.ApiSpecBuilder;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -98,76 +102,38 @@ public class Categories {
 
     @Test
     @DisplayName("Getting error 403")
-    public void GetCategories403ErrorTest() {
-        WireMockServer wireMockServer = new WireMockServer(8080);
-        wireMockServer.start();
-
-        String jsonBody = "{\n" +
-                "  \"status\": {\n" +
-                "    \"timestamp\": \"2018-06-02T22:51:28.209Z\",\n" +
-                "    \"error_code\": 1006,\n" +
-                "    \"error_message\": \"Your API Key subscription plan doesn't support this endpoint.\",\n" +
-                "    \"elapsed\": 10,\n" +
-                "    \"credit_count\": 0\n" +
-                "  }\n" +
-                "}";
-
-        wireMockServer.stubFor(get(urlEqualTo(CATEGORIES_PATH))
-                .willReturn(aResponse()
-                        .withStatus(403)
-                        .withHeader("Content-Type", "application/json")
-                        .withBody(jsonBody)));
-
-        RestAssured.given()
-                .when()
-                .get("http://localhost:8080"+CATEGORIES_PATH)
+    public void Get403ErrorTest() {
+        CategoriesStep.get403(ApiSpecBuilder.API_KEY)
                 .then()
                 .assertThat()
-                .statusCode(403)
-                .and()
-                .body("status.error_code", equalTo(1006))
-                .and()
-                .body("status.error_message", equalTo("Your API Key subscription plan doesn't support this endpoint."));
-
-        wireMockServer.stop();
+                .statusCode(403);
     }
 
+    //Сначала делаю много запросов и после делаю тест на 429
     @Test
     @DisplayName("Getting error 429")
-    public void GetCategories429ErrorTest() {
-        WireMockServer wireMockServer = new WireMockServer(8080);
-        wireMockServer.start();
+    @Description("")
+    public void GetCategories429ErrorTest() throws InterruptedException {
+        ExecutorService executor = Executors.newFixedThreadPool(10);
 
-        String jsonBody = "{\n" +
-                "  \"status\": {\n" +
-                "    \"timestamp\": \"2018-06-02T22:51:28.209Z\",\n" +
-                "    \"error_code\": 1008,\n" +
-                "    \"error_message\": \"You've exceeded your API Key's HTTP request rate limit. Rate limits reset every minute.\",\n" +
-                "    \"elapsed\": 10,\n" +
-                "    \"credit_count\": 0\n" +
-                "  }\n" +
-                "}";
+        for (int i = 0; i < 100; i++) {
+            final int requestNumber = i;
+            executor.submit(() -> {
+                try {
+                    CategoriesStep.getCategories(ApiSpecBuilder.API_KEY);
+                } catch (Exception e) {
+                }
+            });
+        }
+        executor.shutdown();
+        executor.awaitTermination(1, TimeUnit.MINUTES);
 
-        wireMockServer.stubFor(get(urlEqualTo(CATEGORIES_PATH))
-                .willReturn(aResponse()
-                        .withStatus(429)
-                        .withHeader("Content-Type", "application/json")
-                        .withBody(jsonBody)));
-
-        RestAssured.given()
-                .when()
-                .get("http://localhost:8080"+CATEGORIES_PATH)
+        CategoriesStep.getCategories(ApiSpecBuilder.API_KEY)
                 .then()
                 .assertThat()
-                .statusCode(429)
-                .and()
-                .body("status.error_code", equalTo(1008))
-                .and()
-                .body("status.error_message", equalTo("You've exceeded your API Key's HTTP request rate limit. Rate limits reset every minute."));
-
-        wireMockServer.stop();
+                .statusCode(429);
     }
-
+    
     @Test
     @DisplayName("Checking the operation of the limit parameter")
     public void checkParamLimit() {

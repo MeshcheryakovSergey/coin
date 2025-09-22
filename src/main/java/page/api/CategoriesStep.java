@@ -6,6 +6,8 @@ import util.Api;
 import util.ApiSpecBuilder;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static util.ApiSpecBuilder.API_KEY;
 
@@ -27,6 +29,16 @@ public class CategoriesStep {
                 .get(Api.CATEGORIES_PATH);
         return response;
     }
+
+    @Step("Get 403 status coin categories")
+    public static Response get403(String limit) {
+        Response response = ApiSpecBuilder.requestSpec()
+                .header("X-CMC_PRO_API_KEY", API_KEY)
+                .queryParam("limit", limit)
+                .get(Api.LISTING_NEW_PATH);
+        return response;
+    }
+
 
     @Step("Get coin categories with limit: {limit}")
     public static Response queryParamLimit(int limit) {
