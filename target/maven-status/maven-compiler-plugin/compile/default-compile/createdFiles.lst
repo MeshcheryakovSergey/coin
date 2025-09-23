@@ -1,0 +1,7 @@
+page\currencies\CoinStatsScroll.class
+page\api\CategoriesStep.class
+page\main\HeaderLeftMenu.class
+util\Api.class
+page\main\Header.class
+page\main\MainPage.class
+util\ApiSpecBuilder.class

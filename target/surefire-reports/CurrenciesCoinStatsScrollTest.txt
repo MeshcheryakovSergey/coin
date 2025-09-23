@@ -1,0 +1,99 @@
+-------------------------------------------------------------------------------
+Test set: CurrenciesCoinStatsScrollTest
+-------------------------------------------------------------------------------
+Tests run: 48, Failures: 2, Errors: 18, Skipped: 0, Time elapsed: 334.495 s <<< FAILURE! - in CurrenciesCoinStatsScrollTest
+checkUCIDPopoverText(CurrenciesCoinStatsScrollTest)  Time elapsed: 7.408 s  <<< ERROR!
+java.lang.IllegalStateException: Не удалось выполнить проверку после нескольких попыток.
+	at CurrenciesCoinStatsScrollTest.checkUCIDPopoverText(CurrenciesCoinStatsScrollTest.java:402)
+
+checkOpenMarketsTab(CurrenciesCoinStatsScrollTest)  Time elapsed: 9.797 s  <<< ERROR!
+java.lang.IllegalStateException: Не удалось выполнить проверку после нескольких попыток.
+	at CurrenciesCoinStatsScrollTest.checkOpenMarketsTab(CurrenciesCoinStatsScrollTest.java:423)
+
+checkMaxSupplyPopoverText(CurrenciesCoinStatsScrollTest)  Time elapsed: 6.551 s  <<< ERROR!
+java.lang.IllegalStateException: Не удалось выполнить проверку после нескольких попыток.
+	at CurrenciesCoinStatsScrollTest.checkMaxSupplyPopoverText(CurrenciesCoinStatsScrollTest.java:285)
+
+checkMarketCapPopoverText(CurrenciesCoinStatsScrollTest)  Time elapsed: 6.955 s  <<< ERROR!
+java.lang.IllegalStateException: Не удалось выполнить проверку после нескольких попыток.
+	at CurrenciesCoinStatsScrollTest.checkMarketCapPopoverText(CurrenciesCoinStatsScrollTest.java:195)
+
+checkVolumeText(CurrenciesCoinStatsScrollTest)  Time elapsed: 4.605 s  <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: "Volume (24h)"
+     but: was ""
+	at CurrenciesCoinStatsScrollTest.checkVolumeText(CurrenciesCoinStatsScrollTest.java:204)
+
+checkCirculatingSupplyPopoverText(CurrenciesCoinStatsScrollTest)  Time elapsed: 7.851 s  <<< ERROR!
+java.lang.IllegalStateException: Не удалось выполнить проверку после нескольких попыток.
+	at CurrenciesCoinStatsScrollTest.checkCirculatingSupplyPopoverText(CurrenciesCoinStatsScrollTest.java:303)
+
+checkVolMktCap24PopoverText(CurrenciesCoinStatsScrollTest)  Time elapsed: 6.721 s  <<< ERROR!
+java.lang.IllegalStateException: Не удалось выполнить проверку после нескольких попыток.
+	at CurrenciesCoinStatsScrollTest.checkVolMktCap24PopoverText(CurrenciesCoinStatsScrollTest.java:249)
+
+checkTotalSupplyPopoverText(CurrenciesCoinStatsScrollTest)  Time elapsed: 6.952 s  <<< ERROR!
+java.lang.IllegalStateException: Не удалось выполнить проверку после нескольких попыток.
+	at CurrenciesCoinStatsScrollTest.checkTotalSupplyPopoverText(CurrenciesCoinStatsScrollTest.java:267)
+
+checkProfileScorePopoverText(CurrenciesCoinStatsScrollTest)  Time elapsed: 6.845 s  <<< ERROR!
+java.lang.IllegalStateException: Не удалось выполнить проверку после нескольких попыток.
+	at CurrenciesCoinStatsScrollTest.checkProfileScorePopoverText(CurrenciesCoinStatsScrollTest.java:339)
+
+checkOpenNewsTab(CurrenciesCoinStatsScrollTest)  Time elapsed: 8.498 s  <<< ERROR!
+java.lang.IllegalStateException: Не удалось выполнить проверку после нескольких попыток.
+	at CurrenciesCoinStatsScrollTest.checkOpenNewsTab(CurrenciesCoinStatsScrollTest.java:433)
+
+checkCirculatingSupplyVerIconPopoverText(CurrenciesCoinStatsScrollTest)  Time elapsed: 6.543 s  <<< ERROR!
+java.lang.IllegalStateException: Не удалось выполнить проверку после нескольких попыток.
+	at CurrenciesCoinStatsScrollTest.checkCirculatingSupplyVerIconPopoverText(CurrenciesCoinStatsScrollTest.java:321)
+
+checkMarketCapText(CurrenciesCoinStatsScrollTest)  Time elapsed: 4.832 s  <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: "Market cap"
+     but: was ""
+	at CurrenciesCoinStatsScrollTest.checkMarketCapText(CurrenciesCoinStatsScrollTest.java:186)
+
+checkFDVPopoverText(CurrenciesCoinStatsScrollTest)  Time elapsed: 16.471 s  <<< ERROR!
+java.lang.IllegalStateException: Не удалось выполнить проверку после нескольких попыток.
+	at CurrenciesCoinStatsScrollTest.checkFDVPopoverText(CurrenciesCoinStatsScrollTest.java:231)
+
+checkOpenMarketCyclesTab(CurrenciesCoinStatsScrollTest)  Time elapsed: 7.415 s  <<< ERROR!
+java.lang.IllegalStateException: Не удалось выполнить проверку после нескольких попыток.
+	at CurrenciesCoinStatsScrollTest.checkOpenMarketCyclesTab(CurrenciesCoinStatsScrollTest.java:453)
+
+checkOpenChartTab(CurrenciesCoinStatsScrollTest)  Time elapsed: 8.797 s  <<< ERROR!
+org.openqa.selenium.ElementClickInterceptedException: 
+element click intercepted: Element is not clickable at point (482, -1585)
+  (Session info: chrome=140.0.7339.185)
+Build info: version: '4.21.0', revision: '79ed462ef4'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.23'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [a6127da0f3bce6ebd296a920e513da5e, clickElement {id=f.CFEB6AB640278EA9625405788CCB5513.d.DA51583B3D7AA6E1AD08CB7541E46F95.e.126}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 140.0.7339.185, chrome: {chromedriverVersion: 140.0.7339.185 (eeea00e459e..., userDataDir: C:\Users\meshe\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:13339}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:13339/devtoo..., se:cdpVersion: 140.0.7339.185, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (a6127da0f3bce6ebd296a920e513da5e)] -> css selector: div[data-test='section-chart'] div[class*='fadestyle-gradient']:first-child li[data-index='tab-marketCap']>div>div>h5]
+Session ID: a6127da0f3bce6ebd296a920e513da5e
+	at CurrenciesCoinStatsScrollTest.checkOpenChartTab(CurrenciesCoinStatsScrollTest.java:413)
+
+checkVolumePopoverText(CurrenciesCoinStatsScrollTest)  Time elapsed: 7.445 s  <<< ERROR!
+java.lang.IllegalStateException: Не удалось выполнить проверку после нескольких попыток.
+	at CurrenciesCoinStatsScrollTest.checkVolumePopoverText(CurrenciesCoinStatsScrollTest.java:213)
+
+checkOpenAboutTab(CurrenciesCoinStatsScrollTest)  Time elapsed: 7.479 s  <<< ERROR!
+java.lang.IllegalStateException: Не удалось выполнить проверку после нескольких попыток.
+	at CurrenciesCoinStatsScrollTest.checkOpenAboutTab(CurrenciesCoinStatsScrollTest.java:463)
+
+checkTextOnCoinWatchlistToolTipPart1(CurrenciesCoinStatsScrollTest)  Time elapsed: 7.197 s  <<< ERROR!
+java.lang.IllegalStateException: Не удалось выполнить проверку после нескольких попыток.
+	at CurrenciesCoinStatsScrollTest.checkTextOnCoinWatchlistToolTipPart1(CurrenciesCoinStatsScrollTest.java:85)
+
+checkTextOnCoinNumToolTip(CurrenciesCoinStatsScrollTest)  Time elapsed: 7.283 s  <<< ERROR!
+java.lang.IllegalStateException: Не удалось выполнить проверку после нескольких попыток.
+	at CurrenciesCoinStatsScrollTest.checkTextOnCoinNumToolTip(CurrenciesCoinStatsScrollTest.java:58)
+
+checkOpenYieldTab(CurrenciesCoinStatsScrollTest)  Time elapsed: 8.382 s  <<< ERROR!
+java.lang.IllegalStateException: Не удалось выполнить проверку после нескольких попыток.
+	at CurrenciesCoinStatsScrollTest.checkOpenYieldTab(CurrenciesCoinStatsScrollTest.java:443)
+

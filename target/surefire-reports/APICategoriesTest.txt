@@ -1,0 +1,46 @@
+-------------------------------------------------------------------------------
+Test set: APICategoriesTest
+-------------------------------------------------------------------------------
+Tests run: 15, Failures: 6, Errors: 0, Skipped: 0, Time elapsed: 16.202 s <<< FAILURE! - in APICategoriesTest
+checkParamSlug(APICategoriesTest)  Time elapsed: 0.375 s  <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: <12>
+     but: was <13>
+	at APICategoriesTest.checkParamSlug(APICategoriesTest.java:180)
+
+checkFields(APICategoriesTest)  Time elapsed: 0.343 s  <<< FAILURE!
+java.lang.AssertionError: 
+1 expectation failed.
+Expected status code <200> but was <429>.
+
+	at APICategoriesTest.checkFields(APICategoriesTest.java:219)
+
+GetCategoriesWithoutAuth(APICategoriesTest)  Time elapsed: 0.291 s  <<< FAILURE!
+java.lang.AssertionError: 
+1 expectation failed.
+Expected status code <401> but was <429>.
+
+	at APICategoriesTest.GetCategoriesWithoutAuth(APICategoriesTest.java:56)
+
+checkParamLimit(APICategoriesTest)  Time elapsed: 0.294 s  <<< FAILURE!
+java.lang.AssertionError: 
+1 expectation failed.
+Expected status code <200> but was <429>.
+
+	at APICategoriesTest.checkParamLimit(APICategoriesTest.java:138)
+
+checkParamStart(APICategoriesTest)  Time elapsed: 0.306 s  <<< FAILURE!
+java.lang.AssertionError: 
+1 expectation failed.
+Expected status code <200> but was <429>.
+
+	at APICategoriesTest.checkParamStart(APICategoriesTest.java:148)
+
+checkManyParamSymbol(APICategoriesTest)  Time elapsed: 0.292 s  <<< FAILURE!
+java.lang.AssertionError: 
+1 expectation failed.
+Expected status code <200> but was <429>.
+
+	at APICategoriesTest.checkManyParamSymbol(APICategoriesTest.java:208)
+
